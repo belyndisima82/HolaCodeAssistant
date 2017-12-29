@@ -1,0 +1,20 @@
+{
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "plugins": [
+        "react"        
+    ],
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "no-console": [
+            "error", {
+                "allow": ["log"]
+            }
+        ]
+    }
+}
