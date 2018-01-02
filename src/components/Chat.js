@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { AppBar, Drawer } from 'material-ui'
+import Users from './Users'
+import io from 'socket.io-client'
 import PropTypes from 'prop-types'
+
+const socket = io.connect()
 
 class Chat extends Component {
     constructor(props) {
@@ -14,7 +18,17 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.username)
+        //Sends the current user name to the server
+        socket.emit('user joined', this.props.username)
+
+        //Listeners
+        socket.on('users list', users => this.updateUsers(users))
+    }
+
+    updateUsers(users) {
+        this.setState({
+            users
+        })
     }
 
     handleToggle() {
@@ -34,7 +48,7 @@ class Chat extends Component {
                     <AppBar
                         showMenuIconButton={false}
                         title="Online users" />
-                    <div>Users list will be here</div>
+                    <Users data={this.state.users} />
                 </Drawer>
                 <div style={{
                     flex: 1,
