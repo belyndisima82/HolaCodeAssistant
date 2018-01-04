@@ -1,6 +1,7 @@
 import React from 'react'
 import { Avatar } from 'material-ui'
 import { cyan500, white, green500, red500 } from 'material-ui/styles/colors'
+import Radium, { StyleRoot } from 'radium'
 import PropTypes from 'prop-types'
 
 const Messages = (props) =>
@@ -50,20 +51,27 @@ SystemMessage.propTypes = {
 }
 
 const Message = ({ data }) => 
-    <div style={{
-        display: 'flex',
-        padding: '10px 20px',
-        borderBottom: `1px solid ${cyan500}`
-    }}>
-        <Avatar src={`images/${data.picture}.jpg`}></Avatar>
-        <div style={{padding: '0 10px 10px 10px'}}>
-            <div>
-                {data.author}
-                <span style={{color: '#99aab5', fontSize: 12, marginLeft: 5}}>{data.createdAt}</span>
+    <StyleRoot>
+        <div style={{
+            display: 'flex',
+            padding: '10px 20px',
+            borderBottom: `1px solid ${cyan500}`,
+            animation: 'x 1s forwards',
+            animationName: Radium.keyframes({
+                'from': { opacity: 0, backgroundColor: green500 },
+                'to': { opacity: 1 }
+            })
+        }}>
+            <Avatar src={`images/${data.picture}.jpg`}></Avatar>
+            <div style={{padding: '0 10px 10px 10px'}}>
+                <div>
+                    {data.author}
+                    <span style={{color: '#99aab5', fontSize: 12, marginLeft: 5}}>{data.createdAt}</span>
+                </div>
+                <div style={{lineHeight: '20px'}}>{data.body}</div>
             </div>
-            <div style={{lineHeight: '20px'}}>{data.body}</div>
         </div>
-    </div>
+    </StyleRoot>
     
 Message.propTypes = {
     data: PropTypes.shape({
