@@ -17,8 +17,18 @@ class Chat extends Component {
             messages: [],
             isOpen: true
         }
+
+        //Stores data for the 'unread messages' feature
+        this.unreadMessage = {
+            count: 0,
+            windowActive: true,
+            originalTitle: document.title
+        }
+
         this.handleToggle = this.handleToggle.bind(this)
         this.sendMessage = this.sendMessage.bind(this)
+        this.handleFocus = this.handleFocus.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
     }
 
     componentDidMount() {
@@ -31,6 +41,16 @@ class Chat extends Component {
         socket.on('play audio', () => this.playAudio())
 
         this.messagesContainer = document.getElementById('messages')
+
+        //Event listeners
+        window.addEventListener('focus', this.handleFocus)
+        window.addEventListener('blur', this.handleBlur)
+    }
+
+    componentWillUnmount() {
+        //Remove event listeners
+        window.removeEventListener('focus', this.handleFocus)
+        window.removeEventListener('blur', this.handleBlur)
     }
 
     updateUsers(users) {
@@ -46,6 +66,13 @@ class Chat extends Component {
         
         //When a new message is added it scrolls to the bottom of the page
         this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight
+
+        //Checks if the browser window is not active
+        if(!this.unreadMessage.windowActive) {
+            //If not active then it increase the counter and updates the title
+            this.unreadMessage.count++
+            document.title = `${this.unreadMessage.count} unread message - ${this.unreadMessage.originalTitle}`
+        }
     }
 
     sendMessage(body) {
@@ -58,6 +85,18 @@ class Chat extends Component {
         const audio = new Audio(messageAudio)
         audio.currentTime = 0
         audio.play()
+    }
+
+    handleFocus() {
+        //Executes when the user revisit this tab
+        this.unreadMessage.windowActive = true
+        this.unreadMessage.count = 0
+        document.title = this.unreadMessage.originalTitle
+    }
+
+    handleBlur() {
+        //Executes when the user leaves this tab
+        this.unreadMessage.windowActive = false
     }
 
     handleToggle() {
