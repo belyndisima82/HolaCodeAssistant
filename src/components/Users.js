@@ -6,10 +6,10 @@ const Users = ({ data }) =>
     <List>
         {Object.keys(data).map((key, index) =>
             <ListItem
-            key={index}
-            primaryText={data[key].username}
-            leftAvatar={<Avatar src={`images/${data[key].picture}.jpg`}></Avatar>}
-            disabled={true}>
+                key={index}
+                primaryText={data[key].username}
+                leftAvatar={<Avatar src={`images/${data[key].picture}.jpg`}></Avatar>}
+                disabled={true}>
             </ListItem>
         )}
     </List>
@@ -21,7 +21,7 @@ Users.propTypes = {
             username: PropTypes.string.isRequired,
             picture: PropTypes.number.isRequired
         })
-    )
+    ).isRequired
 }
 
 export default Users
