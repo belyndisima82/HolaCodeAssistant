@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { AppBar, Drawer } from 'material-ui'
 import Users from './Users'
+import Messages from './Messages'
+import MessageForm from './MessageForm'
 import io from 'socket.io-client'
 import PropTypes from 'prop-types'
 
@@ -15,6 +17,7 @@ class Chat extends Component {
             isOpen: true
         }
         this.handleToggle = this.handleToggle.bind(this)
+        this.sendMessage = this.sendMessage.bind(this)
     }
 
     componentDidMount() {
@@ -23,12 +26,29 @@ class Chat extends Component {
 
         //Listeners
         socket.on('users list', users => this.updateUsers(users))
+        socket.on('message', message => this.addMessage(message))
+
+        this.messagesContainer = document.getElementById('messages')
     }
 
     updateUsers(users) {
+        //Updates the users object
         this.setState({
             users
         })
+    }
+
+    addMessage(message) {
+        //Adds a new message to the messages array
+        this.setState((prevState) => ({ messages: [...prevState.messages, message] }))
+        
+        //When a new message is added it scrolls to the bottom of the page
+        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight
+    }
+
+    sendMessage(body) {
+        //It sends the message to the server
+        socket.emit('message', body)
     }
 
     handleToggle() {
@@ -57,8 +77,8 @@ class Chat extends Component {
                     maxHeight: '100%'
                 }}>
                     <AppBar onLeftIconButtonClick={this.handleToggle} />
-                    <div style={{flex: 1, overflowY: 'scroll'}}>Messages will be here</div>
-                    <div style={{display: 'flex', padding: 10}}>Form will be here</div>
+                    <Messages data={this.state.messages} id="messages" style={{flex: 1, overflowY: 'scroll'}} />
+                    <MessageForm sendMessage={this.sendMessage} style={{display: 'flex', padding: '10px 20px'}} />
                 </div>
             </div>
         )

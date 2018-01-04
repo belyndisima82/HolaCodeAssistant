@@ -4,6 +4,7 @@ const path = require('path')
 const PORT = process.env.PORT || 8080
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
+const moment = require('moment')
 
 if(process.env.NODE_ENV !== 'production') {
     const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -43,17 +44,45 @@ io.on('connection', (socket) => {
 
         //Sends the list of users
         io.emit('users list', users)
+
+        //Sends the message to the clients (except the sender)
+        const message = createMessage(socket.id, `${users[socket.id].username} has joined to the channel.`, true)
+        message.systemMessageType = 'login'
+        socket.broadcast.emit('message', message)
+    })
+
+    //When the client emits 'message', this executes
+    socket.on('message', body => {
+        //Sends the message to the clients
+        const message =  createMessage(socket.id, body, false)
+        io.emit('message', message)
     })
 
     //When the user disconnects, this executes
     socket.on('disconnect', () => {
+        if(users[socket.id]) {
+            //Sends the message to the clients (except the sender)
+            const message = createMessage(socket.id, `${users[socket.id].username} has left the channel.`, true)
+            message.systemMessageType = 'logout'
+            socket.broadcast.emit('message', message)
+
         //Remove from the users object
         delete users[socket.id]
 
         //Sends the list of users to the current sockets
         socket.broadcast.emit('users list', users)
+        }
     })
 
+})
+
+//returns an object that contains information about the message
+const createMessage = (socketID, body, isSystemMessage) => ({    
+    author: users[socketID].username,
+    picture: users[socketID].picture,
+    body,
+    createdAt: moment().format('HH:mm:ss'),
+    isSystemMessage
 })
 
 server.listen(PORT, (error) => console.log(error ? error : `http://localhost:${PORT}`))
