@@ -49,6 +49,8 @@ io.on('connection', (socket) => {
         const message = createMessage(socket.id, `${users[socket.id].username} has joined to the channel.`, true)
         message.systemMessageType = 'login'
         socket.broadcast.emit('message', message)
+
+        socket.broadcast.emit('play audio')
     })
 
     //When the client emits 'message', this executes
@@ -56,6 +58,8 @@ io.on('connection', (socket) => {
         //Sends the message to the clients
         const message =  createMessage(socket.id, body, false)
         io.emit('message', message)
+
+        socket.broadcast.emit('play audio')
     })
 
     //When the user disconnects, this executes
@@ -65,6 +69,8 @@ io.on('connection', (socket) => {
             const message = createMessage(socket.id, `${users[socket.id].username} has left the channel.`, true)
             message.systemMessageType = 'logout'
             socket.broadcast.emit('message', message)
+
+            socket.broadcast.emit('play audio')
 
         //Remove from the users object
         delete users[socket.id]

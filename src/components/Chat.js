@@ -3,6 +3,7 @@ import { AppBar, Drawer } from 'material-ui'
 import Users from './Users'
 import Messages from './Messages'
 import MessageForm from './MessageForm'
+import messageAudio from '../audio/message.mp3'
 import io from 'socket.io-client'
 import PropTypes from 'prop-types'
 
@@ -27,6 +28,7 @@ class Chat extends Component {
         //Listeners
         socket.on('users list', users => this.updateUsers(users))
         socket.on('message', message => this.addMessage(message))
+        socket.on('play audio', () => this.playAudio())
 
         this.messagesContainer = document.getElementById('messages')
     }
@@ -49,6 +51,13 @@ class Chat extends Component {
     sendMessage(body) {
         //It sends the message to the server
         socket.emit('message', body)
+    }
+
+    playAudio() {
+        //Play audio when new message is added
+        const audio = new Audio(messageAudio)
+        audio.currentTime = 0
+        audio.play()
     }
 
     handleToggle() {
