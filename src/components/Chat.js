@@ -4,10 +4,7 @@ import Users from './Users'
 import Messages from './Messages'
 import MessageForm from './MessageForm'
 import messageAudio from '../audio/message.mp3'
-import io from 'socket.io-client'
 import PropTypes from 'prop-types'
-
-const socket = io.connect()
 
 class Chat extends Component {
     constructor(props) {
@@ -32,6 +29,8 @@ class Chat extends Component {
     }
 
     componentDidMount() {
+        const socket = this.props.socket
+        
         //Sends the current user name to the server
         socket.emit('user joined', this.props.username)
 
@@ -77,7 +76,7 @@ class Chat extends Component {
 
     sendMessage(body) {
         //It sends the message to the server
-        socket.emit('message', body)
+        this.props.socket.emit('message', body)
     }
 
     playAudio() {
@@ -134,7 +133,8 @@ class Chat extends Component {
 }
 
 Chat.propTypes = {
-    username: PropTypes.string.isRequired
+    username: PropTypes.string.isRequired,
+    socket: PropTypes.object.isRequired
 }
 
 export default Chat

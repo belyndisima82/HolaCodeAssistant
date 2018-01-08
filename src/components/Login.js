@@ -29,11 +29,21 @@ class Login extends Component {
             })
             return
         }
-        //If username is valid then:
-        //- send the username to the parent component
-        //- save it to the localStorage
-        this.props.setUsername(this.state.username)
-        localStorage.setItem('username', this.state.username)
+
+        this.props.socket.emit('username exists', this.state.username, (isUsernameTaken) => {
+            if(isUsernameTaken) {
+                this.setState({
+                    errors: ['Username is already taken']
+                })
+                return
+            }
+    
+            //If the username is not taken then:
+            //- send the username to the parent component
+            //- save it to the localStorage
+            this.props.setUsername(this.state.username)
+            localStorage.setItem('username', this.state.username)
+        })
     }
 
     handleChange(e) {
@@ -94,7 +104,8 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-    setUsername: PropTypes.func.isRequired
+    setUsername: PropTypes.func.isRequired,
+    socket: PropTypes.object.isRequired
 }
 
 export default Login

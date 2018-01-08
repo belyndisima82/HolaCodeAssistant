@@ -62,6 +62,11 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('play audio')
     })
 
+    //When the client emits 'username exists', this executes
+    socket.on('username exists', (username, callback) => {
+        callback(usernameExists(username))
+    })
+
     //When the user disconnects, this executes
     socket.on('disconnect', () => {
         if(users[socket.id]) {
@@ -90,5 +95,13 @@ const createMessage = (socketID, body, isSystemMessage) => ({
     createdAt: moment().format('HH:mm:ss'),
     isSystemMessage
 })
+
+//Checks if the given username is available
+//If the username is already taken it return true, otherwise false
+const usernameExists = username => {
+    return Object.keys(users).some(key => {
+        return users[key].username === username
+    })
+}
 
 server.listen(PORT, (error) => console.log(error ? error : `http://localhost:${PORT}`))
