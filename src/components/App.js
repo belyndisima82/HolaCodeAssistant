@@ -10,9 +10,36 @@ class App extends Component {
         super(props)
         this.state = {
             username: '',
-            isLoggedIn: false
+            isLoggedIn: false,
+            isSmallDevice: this.isSmallDevice()
         }
+
         this.setUsername = this.setUsername.bind(this)
+        this.handleResize = this.handleResize.bind(this)
+    }
+
+    componentDidMount() {
+        //Event listeners
+        window.addEventListener('resize', this.handleResize)
+    }
+
+    componentWillUnmount() {
+        //Remove event listeners
+        window.removeEventListener('resize', this.handleResize)
+    }
+
+    isSmallDevice() {
+        return 768 >= window.innerWidth
+    }
+
+    handleResize() {
+        const isSmallDevice = this.isSmallDevice()
+        if(this.state.isSmallDevice !== isSmallDevice) {
+            //Only update if it's necessary
+            this.setState({
+                isSmallDevice: isSmallDevice
+            })
+        }
     }
 
     setUsername(username) {
@@ -27,7 +54,7 @@ class App extends Component {
         if(!this.state.isLoggedIn) return <Login setUsername={this.setUsername} socket={socket} />
         
         //User is logged in, display Chat component
-        return <Chat username={this.state.username} socket={socket} />
+        return <Chat username={this.state.username} socket={socket} isSmallDevice={this.state.isSmallDevice} />
     }
 }
 

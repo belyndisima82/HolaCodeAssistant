@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { AppBar, Drawer } from 'material-ui'
+import IconButton from 'material-ui/IconButton'
+import NavigationClose from 'material-ui/svg-icons/navigation/close'
 import Users from './Users'
 import Messages from './Messages'
 import MessageForm from './MessageForm'
@@ -12,7 +14,7 @@ class Chat extends Component {
         this.state = {
             users: {},
             messages: [],
-            isOpen: true
+            isOpen: !this.props.isSmallDevice
         }
 
         //Stores data for the 'unread messages' feature
@@ -108,12 +110,17 @@ class Chat extends Component {
                 display: 'flex',
                 height: '100vh',
                 flexDirection: 'column',
-                paddingLeft: +this.state.isOpen * 256,
+                paddingLeft: +this.state.isOpen * 256 * +!this.props.isSmallDevice,
                 transition: 'padding-left 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
             }}>
-                <Drawer open={this.state.isOpen}>
+                <Drawer 
+                    open={this.state.isOpen} 
+                    docked={!this.props.isSmallDevice}
+                    onRequestChange={this.handleToggle}>
                     <AppBar
                         showMenuIconButton={false}
+                        iconElementRight={this.props.isSmallDevice ? <IconButton><NavigationClose /></IconButton> : ''}
+                        onRightIconButtonClick={this.handleToggle}
                         title="Online users" />
                     <Users data={this.state.users} />
                 </Drawer>
@@ -134,7 +141,8 @@ class Chat extends Component {
 
 Chat.propTypes = {
     username: PropTypes.string.isRequired,
-    socket: PropTypes.object.isRequired
+    socket: PropTypes.object.isRequired,
+    isSmallDevice: PropTypes.bool.isRequired
 }
 
 export default Chat
