@@ -1,5 +1,5 @@
 # Chat
-This is a simple chat application, build with [Node](https://nodejs.org/en/), [Express](https://expressjs.com/), [Socket.io](https://socket.io/) and [React](https://reactjs.org/).
+This is a simple chat application, build with [Node](https://nodejs.org/en/), [Express](https://expressjs.com/), [Socket.io](https://socket.io/) and [React](https://reactjs.org/). You can check out the demo [here](https://tszilard-chat.herokuapp.com/).
 
 ## Preview
 ![Chat preview](https://user-images.githubusercontent.com/34402696/34831282-d4597432-f6e6-11e7-9129-a92e21f38596.gif)
