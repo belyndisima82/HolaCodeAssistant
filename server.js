@@ -88,11 +88,11 @@ io.on('connection', (socket) => {
 
             socket.broadcast.emit('play audio')
 
-        //Remove from the users object
-        delete users[socket.id]
+            //Remove from the users object
+            delete users[socket.id]
 
-        //Sends the list of users to the current sockets
-        socket.broadcast.emit('users list', users)
+            //Sends the list of users to the current sockets
+            socket.broadcast.emit('users list', users)
         }
     })
 
@@ -109,10 +109,10 @@ const createMessage = (socketID, body, isSystemMessage) => ({
 
 //Checks if the given username is available
 //If the username is already taken it return true, otherwise false
-const usernameExists = username => {
-    return Object.keys(users).some(key => {
-        return users[key].username === username
-    })
-}
+const usernameExists = username => 
+    Object.keys(users).some(key => 
+        users[key].username === username
+    )
+
 
 server.listen(PORT, (error) => console.log(error ? error : `http://localhost:${PORT}`))
