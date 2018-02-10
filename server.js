@@ -114,5 +114,4 @@ const usernameExists = username =>
         users[key].username === username
     )
 
-
 server.listen(PORT, (error) => console.log(error ? error : `http://localhost:${PORT}`))
