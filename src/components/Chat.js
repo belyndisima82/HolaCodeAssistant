@@ -116,6 +116,11 @@ class Chat extends Component {
     }
 
     render() {
+        const usersAppBar = {}
+        if(this.props.isSmallDevice) {
+            usersAppBar.iconElementRight = <IconButton><NavigationClose /></IconButton>
+        }
+
         return ( 
             <div style={{
                 display: 'flex',
@@ -130,9 +135,9 @@ class Chat extends Component {
                     onRequestChange={this.handleToggle}>
                     <AppBar
                         showMenuIconButton={false}
-                        iconElementRight={this.props.isSmallDevice ? <IconButton><NavigationClose /></IconButton> : ''}
                         onRightIconButtonClick={this.handleToggle}
-                        title="Online users" />
+                        title="Online users" 
+                        {...usersAppBar} />
                     <Users data={this.state.users} />
                 </Drawer>
                 <div style={{
