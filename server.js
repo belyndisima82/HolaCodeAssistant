@@ -31,7 +31,7 @@ const users = {}
 io.on('connection', (socket) => {
 
     //When the client emits 'user joined', this executes
-    socket.on('user joined', username => {
+    socket.on('user joined', (username, callback) => {
         //Store user data
         users[socket.id] = {
             username,
@@ -42,6 +42,8 @@ io.on('connection', (socket) => {
             picture: Math.floor((Math.random() * 9))
         }
 
+        callback(users[socket.id])
+
         //Sends the list of users
         io.emit('users list', users)
 
@@ -51,6 +53,15 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('message', message)
 
         socket.broadcast.emit('play audio')
+    })
+
+    //When the client emits 'user reconnect', this executes
+    socket.on('user reconnect', userdata => {
+        //Store user data
+        users[userdata.id] = {
+            username: userdata.username,
+            picture: userdata.picture
+        }
     })
 
     //When the client emits 'message', this executes

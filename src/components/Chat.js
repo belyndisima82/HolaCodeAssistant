@@ -31,15 +31,26 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        const socket = this.props.socket
+        const socket = this.props.socket,
+            userdata = {} //Stores information about the current user
         
-        //Sends the current user name to the server
-        socket.emit('user joined', this.props.username)
+        //Sends the current user name and a callback function to the server
+        socket.emit('user joined', this.props.username, response => {
+            userdata.username = response.username
+            userdata.picture = response.picture
+        })
 
         //Listeners
         socket.on('users list', users => this.updateUsers(users))
         socket.on('message', message => this.addMessage(message))
         socket.on('play audio', () => this.playAudio())
+        socket.on('reconnect', () => {
+            socket.emit('user reconnect', {
+                id: socket.id,
+                username: userdata.username,
+                picture: userdata.picture
+            })
+        })
 
         this.messagesContainer = document.getElementById('messages')
 
