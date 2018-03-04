@@ -33,3 +33,7 @@ To start in development mode run this, instead of ```npm run start```
 ```
 npm run dev
 ```
+
+## Todo
+- [ ] Store messages in database
+- [ ] Maintain state after page refresh
