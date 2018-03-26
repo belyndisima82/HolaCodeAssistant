@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 
 const Users = ({ data }) => 
     <List>
-        {Object.keys(data).map((key, index) =>
+        {data.map((value, index) =>
             <ListItem
                 key={index}
-                primaryText={data[key].username}
-                leftAvatar={<Avatar src={`images/${data[key].picture}.jpg`}></Avatar>}
+                primaryText={value.username}
+                leftAvatar={<Avatar src={`images/${value.picture}.jpg`}></Avatar>}
                 disabled={true}>
             </ListItem>
         )}
@@ -16,7 +16,7 @@ const Users = ({ data }) =>
 
 
 Users.propTypes = {
-    data: PropTypes.objectOf(
+    data: PropTypes.arrayOf(
         PropTypes.shape({
             username: PropTypes.string.isRequired,
             picture: PropTypes.number.isRequired

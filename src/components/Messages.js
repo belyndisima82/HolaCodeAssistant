@@ -1,14 +1,14 @@
 import React from 'react'
 import { Avatar } from 'material-ui'
-import { cyan500, white, green500, red500 } from 'material-ui/styles/colors'
+import { cyan500, white, black, green500, red500 } from 'material-ui/styles/colors'
 import Radium, { StyleRoot } from 'radium'
 import PropTypes from 'prop-types'
 
 const Messages = (props) =>
     <div style={props.style} id={props.id}>
         {props.data.map((message, index) => {
-            if(message.isSystemMessage) return <SystemMessage key={index} type={message.systemMessageType}>{message.createdAt} {message.body}</SystemMessage>
-            
+            if (message.isSystemMessage) return <SystemMessage key={index} type={message.type}>{message.createdAt} {message.body}</SystemMessage>
+
             const data = {
                 picture: message.picture,
                 author: message.author,
@@ -31,26 +31,29 @@ Messages.propTypes = {
     data: PropTypes.arrayOf(
         PropTypes.shape({
             author: PropTypes.string.isRequired,
+            author_id: PropTypes.string.isRequired,
             picture: PropTypes.number.isRequired,
             body: PropTypes.string.isRequired,
             createdAt: PropTypes.string.isRequired,
-            isSystemMessage: PropTypes.bool.isRequired,
-            systemMessageType: PropTypes.string
+            type: PropTypes.oneOf(['normal', 'login', 'logout']),
+            isSystemMessage: PropTypes.bool.isRequired
         })
     ).isRequired
 }
 
 export default Messages
 
-const SystemMessage = (props) => 
-    <div style={{padding: 10, color: white, backgroundColor: props.type === 'login' ? green500 : red500}}>{props.children}</div>
+const SystemMessage = (props) => {
+    const { color, backgroundColor } = getSystemMsgTheme(props.type)
+    return <div style={{ padding: 10, color, backgroundColor }}>{props.children}</div>
+}
 
 SystemMessage.propTypes = {
     type: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired
 }
 
-const Message = ({ data }) => 
+const Message = ({ data }) =>
     <StyleRoot>
         <div style={{
             display: 'flex',
@@ -63,16 +66,16 @@ const Message = ({ data }) =>
             })
         }}>
             <Avatar src={`images/${data.picture}.jpg`}></Avatar>
-            <div style={{padding: '0 10px 10px 10px'}}>
+            <div style={{ padding: '0 10px 10px 10px' }}>
                 <div>
                     {data.author}
-                    <span style={{color: '#99aab5', fontSize: 12, marginLeft: 5}}>{data.createdAt}</span>
+                    <span style={{ color: '#99aab5', fontSize: 12, marginLeft: 5 }}>{data.createdAt}</span>
                 </div>
-                <div style={{lineHeight: '20px'}}>{data.body}</div>
+                <div style={{ lineHeight: '20px' }}>{data.body}</div>
             </div>
         </div>
     </StyleRoot>
-    
+
 Message.propTypes = {
     data: PropTypes.shape({
         author: PropTypes.string.isRequired,
@@ -80,4 +83,24 @@ Message.propTypes = {
         body: PropTypes.string.isRequired,
         createdAt: PropTypes.string.isRequired
     }).isRequired
+}
+
+const getSystemMsgTheme = (type) => {
+    let color = white,
+        backgroundColor
+
+    switch (type) {
+        case 'login':
+            backgroundColor = green500
+            break
+        case 'logout':
+            backgroundColor = red500
+            break
+        default:
+            color = black
+            backgroundColor = white
+            break
+    }
+
+    return { color, backgroundColor }
 }

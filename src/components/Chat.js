@@ -12,7 +12,7 @@ class Chat extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            users: {},
+            users: [],
             messages: [],
             isOpen: !this.props.isSmallDevice
         }
@@ -31,25 +31,21 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        const socket = this.props.socket,
-            userdata = {} //Stores information about the current user
-        
+        const socket = this.props.socket
+
+        //Stores information about the current user
+        let userdata
+
         //Sends the current user name and a callback function to the server
-        socket.emit('user joined', this.props.username, response => {
-            userdata.username = response.username
-            userdata.picture = response.picture
+        socket.emit('user joined', this.props.username, null, response => {
+            userdata = response
         })
 
         //Listeners
         socket.on('users list', users => this.updateUsers(users))
         socket.on('message', message => this.addMessage(message))
-        socket.on('play audio', () => this.playAudio())
         socket.on('reconnect', () => {
-            socket.emit('user reconnect', {
-                id: socket.id,
-                username: userdata.username,
-                picture: userdata.picture
-            })
+            socket.emit('user joined', userdata.username, userdata.picture)
         })
 
         this.messagesContainer = document.getElementById('messages')
@@ -75,28 +71,28 @@ class Chat extends Component {
     addMessage(message) {
         //Adds a new message to the messages array
         this.setState((prevState) => ({ messages: [...prevState.messages, message] }))
-        
+
         //When a new message is added it scrolls to the bottom of the page
         this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight
 
         //Checks if the browser window is not active
-        if(!this.unreadMessage.windowActive) {
+        if (!this.unreadMessage.windowActive) {
             //If not active then it increase the counter and updates the title
             this.unreadMessage.count++
             document.title = `${this.unreadMessage.count} unread message - ${this.unreadMessage.originalTitle}`
+        }
+
+        //Checks if the current user is the author of the message, if not then it plays the sound effect
+        if (message.author_id !== this.props.socket.id) {
+            const audio = new Audio(messageAudio)
+            audio.currentTime = 0
+            audio.play()
         }
     }
 
     sendMessage(body) {
         //It sends the message to the server
         this.props.socket.emit('message', body)
-    }
-
-    playAudio() {
-        //Play audio when new message is added
-        const audio = new Audio(messageAudio)
-        audio.currentTime = 0
-        audio.play()
     }
 
     handleFocus() {
@@ -117,11 +113,11 @@ class Chat extends Component {
 
     render() {
         const usersAppBar = {}
-        if(this.props.isSmallDevice) {
+        if (this.props.isSmallDevice) {
             usersAppBar.iconElementRight = <IconButton><NavigationClose /></IconButton>
         }
 
-        return ( 
+        return (
             <div style={{
                 display: 'flex',
                 height: '100vh',
@@ -129,14 +125,14 @@ class Chat extends Component {
                 paddingLeft: +this.state.isOpen * 256 * +!this.props.isSmallDevice,
                 transition: 'padding-left 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
             }}>
-                <Drawer 
-                    open={this.state.isOpen} 
+                <Drawer
+                    open={this.state.isOpen}
                     docked={!this.props.isSmallDevice}
                     onRequestChange={this.handleToggle}>
                     <AppBar
                         showMenuIconButton={false}
                         onRightIconButtonClick={this.handleToggle}
-                        title="Online users" 
+                        title="Online users"
                         {...usersAppBar} />
                     <Users data={this.state.users} />
                 </Drawer>
@@ -147,8 +143,8 @@ class Chat extends Component {
                     maxHeight: '100%'
                 }}>
                     <AppBar onLeftIconButtonClick={this.handleToggle} />
-                    <Messages data={this.state.messages} id="messages" style={{flex: 1, overflowY: 'scroll'}} />
-                    <MessageForm sendMessage={this.sendMessage} style={{display: 'flex', padding: '10px 20px'}} />
+                    <Messages data={this.state.messages} id="messages" style={{ flex: 1, overflowY: 'scroll' }} />
+                    <MessageForm sendMessage={this.sendMessage} style={{ display: 'flex', padding: '10px 20px' }} />
                 </div>
             </div>
         )

@@ -6,7 +6,7 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 const moment = require('moment')
 
-if(process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
     const webpackDevMiddleware = require('webpack-dev-middleware')
     const webpackHotMiddleware = require('webpack-hot-middleware')
     const webpack = require('webpack')
@@ -14,7 +14,7 @@ if(process.env.NODE_ENV !== 'production') {
     const compiler = webpack(config)
 
     app.use(webpackDevMiddleware(compiler, {
-        noInfo: true, 
+        noInfo: true,
         publicPath: config.output.publicPath
     }))
     app.use(webpackHotMiddleware(compiler))
@@ -26,92 +26,87 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname, '/dist/index.html')
 })
 
-const users = {}
+
+const User = require('./src/classes/User')
+const UserCollection = new (require('./src/classes/UserCollection'))
 
 io.on('connection', (socket) => {
-
     //When the client emits 'user joined', this executes
-    socket.on('user joined', (username, callback) => {
-        //Store user data
-        users[socket.id] = {
-            username,
-            //Generate random image for the user
-            //the value of this key will be a number between 0 and 8
-            //it will represent the name of the image from the images folder
-            //for example if the value is 7 then the user image will be images/7.jpg
-            picture: Math.floor((Math.random() * 9))
-        }
+    socket.on('user joined', (username, picture = null, callback = null) => {
+        //Create new user
+        const user = new User(username, picture)
 
-        callback(users[socket.id])
+        //Store user
+        UserCollection.set(socket.id, user)
 
-        //Sends the list of users
-        io.emit('users list', users)
+        //If the callback function exists then it invokes with the user object as parameter
+        if (callback && typeof callback === 'function') callback(user)
 
-        //Sends the message to the clients (except the sender)
-        const message = createMessage(socket.id, `${users[socket.id].username} has joined to the channel.`, true)
-        message.systemMessageType = 'login'
-        socket.broadcast.emit('message', message)
+        //Sends a list of users to the clients
+        io.emit('users list', UserCollection.list())
 
-        socket.broadcast.emit('play audio')
-    })
-
-    //When the client emits 'user reconnect', this executes
-    socket.on('user reconnect', userdata => {
-        //Store user data
-        users[userdata.id] = {
-            username: userdata.username,
-            picture: userdata.picture
-        }
+        createMessage(socket, '', 'login', message => {
+            //Sends the message to the clients (except the sender)
+            socket.broadcast.emit('message', message)
+        })
     })
 
     //When the client emits 'message', this executes
     socket.on('message', body => {
-        //Sends the message to the clients
-        const message =  createMessage(socket.id, body, false)
-        io.emit('message', message)
-
-        socket.broadcast.emit('play audio')
+        createMessage(socket, body, 'normal', message => {
+            //Sends the message to the clients
+            io.emit('message', message)
+        })
     })
 
     //When the client emits 'username exists', this executes
     socket.on('username exists', (username, callback) => {
-        callback(usernameExists(username))
+        callback(UserCollection.isUsernameExists(username))
     })
 
     //When the user disconnects, this executes
     socket.on('disconnect', () => {
-        if(users[socket.id]) {
-            //Sends the message to the clients (except the sender)
-            const message = createMessage(socket.id, `${users[socket.id].username} has left the channel.`, true)
-            message.systemMessageType = 'logout'
-            socket.broadcast.emit('message', message)
+        if (UserCollection.has(socket.id)) {
 
-            socket.broadcast.emit('play audio')
+            createMessage(socket, '', 'logout', message => {
+                //Sends the message to the clients (except the sender)
+                socket.broadcast.emit('message', message)
+            })
 
-            //Remove from the users object
-            delete users[socket.id]
+            //Delete user
+            UserCollection.delete(socket.id)
 
-            //Sends the list of users to the current sockets
-            socket.broadcast.emit('users list', users)
+            //Sends a list of users to the clients (except the sender)
+            socket.broadcast.emit('users list', UserCollection.list())
+
         }
     })
-
 })
 
-//returns an object that contains information about the message
-const createMessage = (socketID, body, isSystemMessage) => ({    
-    author: users[socketID].username,
-    picture: users[socketID].picture,
-    body,
-    createdAt: moment().format('HH:mm:ss'),
-    isSystemMessage
-})
+/**
+ * Creates an object, that contains information about the message, and pass it to the callback function as parameter
+ * @param {Object} socket Socket instance
+ * @param {string} body Body of the message
+ * @param {string} type Message type (normal, login or logout)
+ * @param {Function} callback 
+ */
+const createMessage = (socket, body, type, callback) => {
+    if (UserCollection.has(socket.id)) {
+        const { username, picture } = UserCollection.get(socket.id)
 
-//Checks if the given username is available
-//If the username is already taken it return true, otherwise false
-const usernameExists = username => 
-    Object.keys(users).some(key => 
-        users[key].username === username
-    )
+        if (type === 'login') body = `${username} has joined to the channel.`
+        if (type === 'logout') body = `${username} has left the channel.`
+
+        callback({
+            author: username,
+            author_id: socket.id,
+            picture,
+            body,
+            createdAt: moment().format('HH:mm:ss'),
+            type,
+            isSystemMessage: type === 'login' || type === 'logout'
+        })
+    }
+}
 
 server.listen(PORT, (error) => console.log(error ? error : `http://localhost:${PORT}`))
