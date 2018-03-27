@@ -34,7 +34,7 @@ class App extends Component {
 
     handleResize() {
         const isSmallDevice = this.isSmallDevice()
-        if(this.state.isSmallDevice !== isSmallDevice) {
+        if (this.state.isSmallDevice !== isSmallDevice) {
             //Only update if it's necessary
             this.setState({
                 isSmallDevice: isSmallDevice
@@ -51,8 +51,8 @@ class App extends Component {
 
     render() {
         //User is not logged in, display Login component
-        if(!this.state.isLoggedIn) return <Login setUsername={this.setUsername} socket={socket} />
-        
+        if (!this.state.isLoggedIn) return <Login setUsername={this.setUsername} socket={socket} />
+
         //User is logged in, display Chat component
         return <Chat username={this.state.username} socket={socket} isSmallDevice={this.state.isSmallDevice} />
     }

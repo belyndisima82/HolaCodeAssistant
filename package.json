@@ -2,8 +2,8 @@
   "name": "chat",
   "version": "1.0.0",
   "scripts": {
-    "start": "set NODE_ENV=production& webpack --config webpack.prod.js & node server",
-    "dev": "node server"
+    "start": "set NODE_ENV=production& webpack --config webpack/webpack.prod.js & node src/server/index",
+    "dev": "node src/server/index"
   },
   "devDependencies": {
     "eslint": "^4.14.0",

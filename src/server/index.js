@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
     const webpackDevMiddleware = require('webpack-dev-middleware')
     const webpackHotMiddleware = require('webpack-hot-middleware')
     const webpack = require('webpack')
-    const config = require('./webpack.dev')
+    const config = require('../../webpack/webpack.dev')
     const compiler = webpack(config)
 
     app.use(webpackDevMiddleware(compiler, {
@@ -20,15 +20,15 @@ if (process.env.NODE_ENV !== 'production') {
     app.use(webpackHotMiddleware(compiler))
 }
 
-app.use(express.static(path.join(__dirname, 'dist')))
+app.use(express.static(path.join(__dirname, '../../dist')))
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname, '/dist/index.html')
+    res.sendFile(__dirname, 'dist/index.html')
 })
 
 
-const User = require('./src/classes/User')
-const UserCollection = new (require('./src/classes/UserCollection'))
+const User = require('./classes/User')
+const UserCollection = new (require('./classes/UserCollection'))
 
 io.on('connection', (socket) => {
     //When the client emits 'user joined', this executes

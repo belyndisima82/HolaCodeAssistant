@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     entry: [
-        './src/index.js'
+        './src/client/index.js'
     ],
     module: {
         rules: [
@@ -27,20 +27,20 @@ module.exports = {
     },
     output: {
         filename: 'bundle.js',
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, '../dist'),
         publicPath: '/'
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            template: 'src/client/index.html'
         }),
         new CopyWebpackPlugin([
             {
-                from: 'src/images',
+                from: 'src/client/images',
                 to: 'images'
             },
             {
-                from: 'src/favicon.ico',
+                from: 'src/client/favicon.ico',
                 to: 'favicon.ico'
             }
         ])
