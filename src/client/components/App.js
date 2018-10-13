@@ -60,13 +60,6 @@ class App extends Component {
         }
     }
 
-    // setUsername(username) {
-    //     this.setState({
-    //         username,
-    //         isLoggedIn: true
-    //     })
-    // }
-
     render() {
 
       var uiConfig = {
