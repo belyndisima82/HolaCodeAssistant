@@ -1,10 +1,17 @@
-const express = require('express')
-const app = express()
-const path = require('path')
+const express = require('express');
+const app = express();
+const path = require('path');
 const PORT = process.env.PORT || 8080
-const server = require('http').createServer(app)
+const server = require('http').createServer(app);
 const io = require('socket.io')(server)
-const moment = require('moment')
+const moment = require('moment');
+const AWS = require('aws-sdk');
+AWS.config.loadFromPath('/Users/belindadominguez/Documents/chat/src/server/credentials.json');
+AWS.config.update({region:'us-east-1'});
+const multer = require("multer");
+const fs = require("fs");
+const att = require('../database/mysql.js');
+
 
 if (process.env.NODE_ENV !== 'production') {
     const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -88,7 +95,7 @@ io.on('connection', (socket) => {
  * @param {Object} socket Socket instance
  * @param {string} body Body of the message
  * @param {string} type Message type (normal, login or logout)
- * @param {Function} callback 
+ * @param {Function} callback
  */
 const createMessage = (socket, body, type, callback) => {
     if (UserCollection.has(socket.id)) {
@@ -107,6 +114,65 @@ const createMessage = (socket, body, type, callback) => {
             isSystemMessage: type === 'login' || type === 'logout'
         })
     }
+}
+
+// rekognition
+var rekognition = new AWS.Rekognition({apiVersion: '2016-06-27'});
+
+const storage = multer.diskStorage({
+   destination: function (req, file, cb) {
+     cb(null, "./public/uploads/")
+   },
+   filename: function(req, file, cb){
+      cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
+   }
+});
+
+const upload = multer({storage: storage}).single("picture");
+
+
+app.post("/upload", function (req, res) {
+   upload(req, res, function (err) {
+      if(err instanceof multer.MulterError) {
+        // handle error
+      } else {
+        const uploadedImage = req.body.picture;
+        var buffImage = new Buffer(uploadedImage.replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
+        searchByImage(buffImage, res);
+      }
+   });
+})
+
+/* This operation detects faces in an image and adds them to the specified Rekognition collection. */
+
+function searchByImage(image, res) {
+  var params = {
+   CollectionId: "holacode",
+   Image: {
+     Bytes: image /* Strings will be Base-64 encoded on your behalf */
+   }
+ };
+  rekognition.searchFacesByImage(params, function(err, data) {
+    if (err) console.log(err, err.stack); // an error occurred
+    else  {
+      if(data.FaceMatches.length > 0) {
+        var todayDate = new Date();
+        console.log(todayDate + ' ')
+        var picId = 'Belinda'
+
+        att.addAttendance(picId, todayDate, (err, results) => {
+          if (err) {
+            console.log(err);
+            res.sendStatus(500);
+          } else {
+            res.send('Hi Belinda').end();
+          }
+        })
+      } else {
+        res.send('Your face is not Recognized').end();
+      }}
+  });
+
 }
 
 server.listen(PORT, (error) => console.log(error ? error : `http://localhost:${PORT}`))
