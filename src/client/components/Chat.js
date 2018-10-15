@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { AppBar, Drawer } from 'material-ui'
 import IconButton from 'material-ui/IconButton'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
-import Users from './Users'
-import Messages from './Messages'
-import MessageForm from './MessageForm'
-import messageAudio from '../audio/message.mp3'
-import PropTypes from 'prop-types'
+import Users from './Users';
+import Messages from './Messages';
+import MessageForm from './MessageForm';
+import messageAudio from '../audio/message.mp3';
+import PropTypes from 'prop-types';
 
 class Chat extends Component {
     constructor(props) {
