@@ -7,6 +7,7 @@ import Messages from './Messages';
 import MessageForm from './MessageForm';
 import messageAudio from '../audio/message.mp3';
 import PropTypes from 'prop-types';
+import Attendance from './attendance.jsx';
 
 class Chat extends Component {
     constructor(props) {
@@ -125,7 +126,7 @@ class Chat extends Component {
         return (
             <div style={{
                 display: 'flex',
-                width: '55%',
+                width: '54%',
                 height: '80vh',
                 flexDirection: 'column',
                 paddingLeft: +this.state.isOpen * 256 * +!this.props.isSmallDevice,

@@ -6,7 +6,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server)
 const moment = require('moment');
 const AWS = require('aws-sdk');
-AWS.config.loadFromPath('/Users/belindadominguez/Documents/chat/src/server/credentials.json');
+AWS.config.loadFromPath('/Users/ulises/Documents/Repos/HolaCodeAssistant/src/server/credentials.json');
 AWS.config.update({region:'us-east-1'});
 const multer = require("multer");
 const fs = require("fs");
