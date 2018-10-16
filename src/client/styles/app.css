@@ -8,6 +8,7 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+<<<<<<< HEAD
 
 .selected {
   height: 100vw;
@@ -71,3 +72,5 @@ h1 {
 .app-bar h1{
   color: rgb(243, 9, 233) !important;
 }
+=======
+>>>>>>> chagend location app.js
