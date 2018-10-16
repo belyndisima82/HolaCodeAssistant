@@ -31,28 +31,39 @@ h1 {
   font-family: 'Krub', sans-serif;
 }
 
+.drawer{
+  background-color: white;
+   border-left: 6px solid lightblue;
+  height: 700px;
+  width: 320px;
+  position: fixed;
+  right: 0.5px;
+  top: 0.5px;
+  bottom: 0.5px;
+
+}
+.title{
+  position:absolute;
+  right: 450px;
+  top: 10px;
+}
 .calendar {
-  border-width:0;
-  width: 500vw;
-  height: 900vw;
-  frameborder: 0;
-  scrolling: no;
+  border: solid 1px #777;
+  width: 320px;
+  frameborder: "0";
+  scrolling: "no";
+  max-height: 700px;
+  min-height: 400px;
 }
-
-.styles_modal__gNwvD {
-  height: 35vw;
-  width: 80vw;
+.tickets {
+  border: solid 1px #777;
+  width: 395px;
+  max-height: 700px;
+  min-height: 220px;
 }
-
-iframe {
-  width: 65vw;
-  min-height: 35vw;
-}
-
-.rowNoFlex {
+.rowNoFlex{
   margin-top: 8vw;
 }
-
 .app-bar {
   background-color: transparent !important;
 }
