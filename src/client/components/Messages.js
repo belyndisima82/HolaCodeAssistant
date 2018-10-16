@@ -65,7 +65,7 @@ const Message = ({ data }) =>
                 'to': { opacity: 1 }
             })
         }}>
-            <Avatar src={`images/${data.picture}.jpg`}></Avatar>
+            <Avatar src={`${data.picture}`}></Avatar>
             <div style={{ padding: '0 10px 10px 10px' }}>
                 <div>
                     {data.author}
