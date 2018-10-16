@@ -2,7 +2,7 @@
 
 * {
     padding: 0;
-    margin: 0
+    margin: 0;
 }
 
 body {
@@ -16,11 +16,47 @@ body {
 }
 
 .holaLogo {
-  margin-left: 27%;
+  margin-left: 26%;
   margin-top: 4%;
+  width: 15%
+}
+
+.holaLogo2 {
+  margin-left: 50%;
+  margin-top: 8%;
   width: 15%
 }
 
 h1 {
   font-family: 'Krub', sans-serif;
+}
+
+.calendar {
+  border-width:0;
+  width: 500vw;
+  height: 900vw;
+  frameborder: 0;
+  scrolling: no;
+}
+
+.styles_modal__gNwvD {
+  height: 35vw;
+  width: 80vw;
+}
+
+iframe {
+  width: 65vw;
+  min-height: 35vw;
+}
+
+.rowNoFlex {
+  margin-top: 8vw;
+}
+
+.app-bar {
+  background-color: transparent !important;
+}
+
+.app-bar h1{
+  color: rgb(243, 9, 233) !important;
 }
