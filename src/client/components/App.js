@@ -81,9 +81,9 @@ class App extends Component {
             <div className={`${this.state.isSignedIn ? '' : 'selected' }`}>
             {this.state.isSignedIn ?(
               <span>
-              <div>{firebase.auth().currentUser.displayName}</div>
-              <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
-              <h1>Welcome to Hola Code Assistant!<br></br></h1>
+              <div className='buttonUser'>{firebase.auth().currentUser.displayName}</div>
+              <button className='buttonUser1' onClick={() => firebase.auth().signOut()}>Sign out!</button>
+              <h1 style={{display: 'flex', justifyContent: 'center'}}>Welcome to Hola Code Assistant!<br></br></h1>
               <div className="rowNoFlex">
                 <Chat className='col-md-10' username={firebase.auth().currentUser.displayName} socket={socket} isSmallDevice={this.state.isSmallDevice} picture={firebase.auth().currentUser.photoURL}/>
                 <SideBar className='col-md-2'/>

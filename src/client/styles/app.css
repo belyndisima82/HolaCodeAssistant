@@ -8,8 +8,6 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
-<<<<<<< HEAD
-=======
 
 .selected {
   height: 100vw;
@@ -24,6 +22,14 @@ body {
 }
 
 h1 {
-  font-family: 'Krub', sans-serif;
+  font-family: 'Boogaloo', cursive;
 }
->>>>>>> afca5ce0baf1f1b6a99861273f405f18b15a989a
+.buttonUser{
+  margin-left: 90vw;
+}
+.buttonUser1{
+  margin-left: 95vw;
+}
+#messages{
+  background-image: url(https://i.stack.imgur.com/5rVml.png);
+}
