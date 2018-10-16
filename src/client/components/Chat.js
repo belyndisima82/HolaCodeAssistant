@@ -125,7 +125,7 @@ class Chat extends Component {
         return (
             <div style={{
                 display: 'flex',
-                width: '70%',
+                width: '55%',
                 height: '80vh',
                 flexDirection: 'column',
                 paddingLeft: +this.state.isOpen * 256 * +!this.props.isSmallDevice,
