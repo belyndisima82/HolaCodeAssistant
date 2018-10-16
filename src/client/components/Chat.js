@@ -125,16 +125,9 @@ class Chat extends Component {
 
         return (
             <div style={{
-<<<<<<< HEAD
-                display: 'auto',
-                height: '100vh',
-                width:'88.5vh',
-                left:"true",
-=======
                 display: 'flex',
-                width: '70%',
+                width: '54%',
                 height: '80vh',
->>>>>>> master
                 flexDirection: 'column',
                 paddingLeft: +this.state.isOpen * 256 * +!this.props.isSmallDevice,
                 transition: 'padding-left 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
@@ -149,12 +142,7 @@ class Chat extends Component {
                         onRightIconButtonClick={this.handleToggle}
                         title="Online users"
                         {...usersAppBar} />
-<<<<<<< HEAD
-                        <Attendance />
-                      <Users data={this.state.users} />
-=======
                       <Users data={this.state.users} className="users"/>
->>>>>>> master
                 </Drawer>
                 <div style={{
                     flex: 1,
@@ -162,10 +150,6 @@ class Chat extends Component {
                     flexDirection: 'column',
                     maxHeight: '100%'
                 }}>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
                     <Messages data={this.state.messages} id="messages" style={{ flex: 1, overflowY: 'scroll' }} />
                     <MessageForm sendMessage={this.sendMessage} style={{ display: 'flex', padding: '10px 20px' }} />
                 </div>

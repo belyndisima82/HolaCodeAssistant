@@ -16,11 +16,7 @@ body {
 }
 
 .holaLogo {
-<<<<<<< HEAD
-  margin-left: 30%;
-=======
   margin-left: 26%;
->>>>>>> master
   margin-top: 4%;
   width: 15%
 }
@@ -34,17 +30,15 @@ body {
 h1 {
   font-family: 'Krub', sans-serif;
 }
-<<<<<<< HEAD
 .drawer{
   background-color: white;
    border-left: 6px solid lightblue;
-  height: 800px;
-  width: 400px;
+  height: 700px;
+  width: 320px;
   position: fixed;
   right: 0.5px;
   top: 0.5px;
   bottom: 0.5px;
-  overflow: scroll;
 
 }
 .title{
@@ -54,7 +48,7 @@ h1 {
 }
 .calendar {
   border: solid 1px #777;
-  width: 395px;
+  width: 320px;
   frameborder: "0";
   scrolling: "no";
   max-height: 700px;
@@ -65,35 +59,7 @@ h1 {
   width: 395px;
   max-height: 700px;
   min-height: 220px;
-=======
-
-.calendar {
-  border-width:0;
-  width: 500vw;
-  height: 900vw;
-  frameborder: 0;
-  scrolling: no;
 }
-
-.styles_modal__gNwvD {
-  height: 35vw;
-  width: 80vw;
-}
-
-iframe {
-  width: 65vw;
-  min-height: 35vw;
-}
-
-.rowNoFlex {
+.rowNoFlex{
   margin-top: 8vw;
-}
-
-.app-bar {
-  background-color: transparent !important;
-}
-
-.app-bar h1{
-  color: rgb(243, 9, 233) !important;
->>>>>>> master
 }
