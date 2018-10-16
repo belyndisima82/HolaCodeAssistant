@@ -30,6 +30,7 @@ body {
 h1 {
   font-family: 'Krub', sans-serif;
 }
+
 .drawer{
   background-color: white;
    border-left: 6px solid lightblue;
@@ -62,4 +63,11 @@ h1 {
 }
 .rowNoFlex{
   margin-top: 8vw;
+}
+.app-bar {
+  background-color: transparent !important;
+}
+
+.app-bar h1{
+  color: rgb(243, 9, 233) !important;
 }
