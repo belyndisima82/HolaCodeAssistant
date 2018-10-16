@@ -81,7 +81,7 @@ class App extends Component {
             <div className={`${this.state.isSignedIn ? '' : 'selected' }`}>
             {this.state.isSignedIn ?(
               <span>
-              <div>{firebase.auth().currentUser.displayName}</div>
+              <div className="userId">{firebase.auth().currentUser.displayName}</div>
               <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
               <h1>Welcome to Hola Code Assistant!<br></br></h1>
               <div className="rowNoFlex">
@@ -96,7 +96,8 @@ class App extends Component {
                 firebaseAuth={firebase.auth()}
                 />
               <div>
-                <img className= 'holaLogo' src='../images/holacode.png'></img>
+                <div><img className= 'holaLogo' src='../images/holacode.png'></img></div>
+                <div><img className= 'holaLogo2' src='../images/holacode.png'></img></div>
               </div>
               </span>
             )}
