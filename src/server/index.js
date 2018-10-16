@@ -39,7 +39,7 @@ const UserCollection = new (require('./classes/UserCollection'))
 
 io.on('connection', (socket) => {
     //When the client emits 'user joined', this executes
-    socket.on('user joined', (username, picture = null, callback = null) => {
+    socket.on('user joined', (username, picture, callback = null) => {
         //Create new user
         const user = new User(username, picture)
 
@@ -115,6 +115,7 @@ const createMessage = (socket, body, type, callback) => {
         })
     }
 }
+
 
 // rekognition
 var rekognition = new AWS.Rekognition({apiVersion: '2016-06-27'});

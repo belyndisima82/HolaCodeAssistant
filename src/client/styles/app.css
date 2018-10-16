@@ -8,3 +8,22 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+<<<<<<< HEAD
+=======
+
+.selected {
+  height: 100vw;
+  background: url("stickyNotes.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.holaLogo {
+  margin-left: 27%;
+  margin-top: 4%;
+  width: 15%
+}
+
+h1 {
+  font-family: 'Krub', sans-serif;
+}
+>>>>>>> afca5ce0baf1f1b6a99861273f405f18b15a989a

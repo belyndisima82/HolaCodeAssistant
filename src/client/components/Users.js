@@ -2,13 +2,13 @@ import React from 'react'
 import { List, ListItem, Avatar } from 'material-ui'
 import PropTypes from 'prop-types'
 
-const Users = ({ data }) => 
+const Users = ({ data }) =>
     <List>
         {data.map((value, index) =>
             <ListItem
                 key={index}
                 primaryText={value.username}
-                leftAvatar={<Avatar src={`images/${value.picture}.jpg`}></Avatar>}
+                leftAvatar={<Avatar src={value.picture}></Avatar>}
                 disabled={true}>
             </ListItem>
         )}

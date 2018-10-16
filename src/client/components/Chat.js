@@ -28,7 +28,10 @@ class Chat extends Component {
         this.sendMessage = this.sendMessage.bind(this)
         this.handleFocus = this.handleFocus.bind(this)
         this.handleBlur = this.handleBlur.bind(this)
+
     }
+
+
 
     componentDidMount() {
         const socket = this.props.socket
@@ -37,11 +40,12 @@ class Chat extends Component {
         let userdata
 
         //Sends the current user name and a callback function to the server
-        socket.emit('user joined', this.props.username, null, response => {
+        socket.emit('user joined', this.props.username, this.props.picture, response => {
             userdata = response
         })
 
         //Listeners
+
         socket.on('users list', users => this.updateUsers(users))
         socket.on('message', message => this.addMessage(message))
         socket.on('reconnect', () => {
@@ -112,6 +116,7 @@ class Chat extends Component {
     }
 
     render() {
+      console.log(this.state.users)
         const usersAppBar = {}
         if (this.props.isSmallDevice) {
             usersAppBar.iconElementRight = <IconButton><NavigationClose /></IconButton>
@@ -134,7 +139,7 @@ class Chat extends Component {
                         onRightIconButtonClick={this.handleToggle}
                         title="Online users"
                         {...usersAppBar} />
-                    <Users data={this.state.users} />
+                      <Users data={this.state.users} />
                 </Drawer>
                 <div style={{
                     flex: 1,
