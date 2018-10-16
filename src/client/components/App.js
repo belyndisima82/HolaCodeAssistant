@@ -5,6 +5,7 @@ import Chat from './Chat'
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import SideBar from './sidebar.jsx';
+const axios = require("axios");
 
 const socket = io.connect();
 
@@ -36,9 +37,11 @@ class App extends Component {
         this.setState({
           isSignedIn : !!user
         });
+
       });
         //Event listeners
         window.addEventListener('resize', this.handleResize)
+
     }
 
     componentWillUnmount() {
@@ -75,18 +78,14 @@ class App extends Component {
       };
 
           return (
-            <div>
+            <div className={`${this.state.isSignedIn ? '' : 'selected' }`}>
             {this.state.isSignedIn ?(
               <span>
-              <div>Signed In!</div>
+              <div>{firebase.auth().currentUser.displayName}</div>
               <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
-              <h1>Hola Code {firebase.auth().currentUser.displayName}</h1>
-              <img
-              alt="profile picture"
-              src={firebase.auth().currentUser.photoURL} className="propic"
-              />
+              <h1>Welcome to Hola Code Assistant!<br></br></h1>
               <div className="rowNoFlex">
-                <Chat className='col-md-10' username={firebase.auth().currentUser.displayName} socket={socket} isSmallDevice={this.state.isSmallDevice} />
+                <Chat className='col-md-10' username={firebase.auth().currentUser.displayName} socket={socket} isSmallDevice={this.state.isSmallDevice} picture={firebase.auth().currentUser.photoURL}/>
                 <SideBar className='col-md-2'/>
               </div>
               </span>
@@ -96,9 +95,12 @@ class App extends Component {
                 uiConfig={uiConfig}
                 firebaseAuth={firebase.auth()}
                 />
+              <div>
+                <img className= 'holaLogo' src='../images/holacode.png'></img>
+              </div>
               </span>
             )}
-            </div>
+          </div>
           );
     }
 }
