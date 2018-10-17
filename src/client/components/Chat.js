@@ -136,7 +136,7 @@ class Chat extends Component {
                     open={this.state.isOpen}
                     docked={!this.props.isSmallDevice}
                     onRequestChange={this.handleToggle}
-                    containerStyle={{height: 300, top: 130}}>
+                    containerStyle={{height: 647, top: 50}}>
                     <AppBar className="app-bar"
                         showMenuIconButton={false}
                         onRightIconButtonClick={this.handleToggle}
