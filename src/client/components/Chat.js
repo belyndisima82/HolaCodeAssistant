@@ -7,6 +7,7 @@ import Messages from './Messages';
 import MessageForm from './MessageForm';
 import messageAudio from '../audio/message.mp3';
 import PropTypes from 'prop-types';
+import Attendance from './attendance.jsx';
 
 class Chat extends Component {
     constructor(props) {
@@ -125,21 +126,23 @@ class Chat extends Component {
         return (
             <div style={{
                 display: 'flex',
-                height: '100vh',
+                width: '54%',
+                height: '80vh',
                 flexDirection: 'column',
                 paddingLeft: +this.state.isOpen * 256 * +!this.props.isSmallDevice,
                 transition: 'padding-left 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
             }}>
-                <Drawer
+                <Drawer className="drawer"
                     open={this.state.isOpen}
                     docked={!this.props.isSmallDevice}
-                    onRequestChange={this.handleToggle}>
-                    <AppBar
+                    onRequestChange={this.handleToggle}
+                    containerStyle={{height: 300, top: 130}}>
+                    <AppBar className="app-bar"
                         showMenuIconButton={false}
                         onRightIconButtonClick={this.handleToggle}
                         title="Online users"
                         {...usersAppBar} />
-                      <Users data={this.state.users} />
+                      <Users data={this.state.users} className="users"/>
                 </Drawer>
                 <div style={{
                     flex: 1,
@@ -147,7 +150,6 @@ class Chat extends Component {
                     flexDirection: 'column',
                     maxHeight: '100%'
                 }}>
-                    <AppBar onLeftIconButtonClick={this.handleToggle} />
                     <Messages data={this.state.messages} id="messages" style={{ flex: 1, overflowY: 'scroll' }} />
                     <MessageForm sendMessage={this.sendMessage} style={{ display: 'flex', padding: '10px 20px' }} />
                 </div>

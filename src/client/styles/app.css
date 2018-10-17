@@ -2,12 +2,13 @@
 
 * {
     padding: 0;
-    margin: 0
+    margin: 0;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
 }
+<<<<<<< HEAD
 
 .selected {
   height: 100vw;
@@ -16,8 +17,14 @@ body {
 }
 
 .holaLogo {
-  margin-left: 27%;
+  margin-left: 26%;
   margin-top: 4%;
+  width: 15%
+}
+
+.holaLogo2 {
+  margin-left: 50%;
+  margin-top: 8%;
   width: 15%
 }
 
@@ -33,3 +40,46 @@ h1 {
 #messages{
   background-image: url(https://i.stack.imgur.com/5rVml.png);
 }
+
+.drawer{
+  background-color: white;
+   border-left: 6px solid lightblue;
+  height: 700px;
+  width: 320px;
+  position: fixed;
+  right: 0.5px;
+  top: 0.5px;
+  bottom: 0.5px;
+
+}
+.title{
+  position:absolute;
+  right: 450px;
+  top: 10px;
+}
+.calendar {
+  border: solid 1px #777;
+  width: 320px;
+  frameborder: "0";
+  scrolling: "no";
+  max-height: 700px;
+  min-height: 400px;
+}
+.tickets {
+  border: solid 1px #777;
+  width: 395px;
+  max-height: 700px;
+  min-height: 220px;
+}
+.rowNoFlex{
+  margin-top: 8vw;
+}
+.app-bar {
+  background-color: transparent !important;
+}
+
+.app-bar h1{
+  color: rgb(243, 9, 233) !important;
+}
+=======
+>>>>>>> chagend location app.js
