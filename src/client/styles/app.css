@@ -8,7 +8,6 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
-<<<<<<< HEAD
 
 .selected {
   height: 100vw;
@@ -38,7 +37,7 @@ h1 {
   margin-left: 95vw;
 }
 #messages{
-  background-image: url(https://i.stack.imgur.com/5rVml.png);
+  background-image: url("Background.jpg");;
 }
 
 .drawer{
@@ -81,5 +80,3 @@ h1 {
 .app-bar h1{
   color: rgb(243, 9, 233) !important;
 }
-=======
->>>>>>> chagend location app.js

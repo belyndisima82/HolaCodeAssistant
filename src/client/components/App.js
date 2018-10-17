@@ -78,15 +78,18 @@ class App extends Component {
       };
 
           return (
+
             <div className={`${this.state.isSignedIn ? '' : 'selected' }`}>
             {this.state.isSignedIn ?(
               <span>
               <div className='buttonUser'>{firebase.auth().currentUser.displayName}</div>
+              <div class="w3-hide-large w3-hide-large w3-padding-16">
               <button className='buttonUser1' onClick={() => firebase.auth().signOut()}>Sign out!</button>
               <h1 style={{display: 'flex', justifyContent: 'center'}}>Welcome to Hola Code Assistant!<br></br></h1>
               <div className="rowNoFlex">
                 <Chat className='col-md-10' username={firebase.auth().currentUser.displayName} socket={socket} isSmallDevice={this.state.isSmallDevice} picture={firebase.auth().currentUser.photoURL}/>
                 <SideBar className='col-md-2'/>
+                </div>
               </div>
               </span>
             ) : (
@@ -96,8 +99,7 @@ class App extends Component {
                 firebaseAuth={firebase.auth()}
                 />
               <div>
-                <div><img className= 'holaLogo' src='../images/holacode.png'></img></div>
-                <div><img className= 'holaLogo2' src='../images/holacode.png'></img></div>
+                <img className= 'holaLogo' src='../images/holacode.png'></img>
               </div>
               </span>
             )}
