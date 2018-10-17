@@ -63,7 +63,18 @@ io.on('connection', (socket) => {
         createMessage(socket, body, 'normal', message => {
             //Sends the message to the clients
             io.emit('message', message)
+            var q= 'INSERT INTO messages (username, day, message) VALUES (?, 'moment().format('HH:mm:ss')', ? )'
+            var inserts= [username, day, message]
+            att.connection.query(q, function(err, rows) {
+              att.connection.release();
+              if (err) {
+                    return err;
+                } else {
+                    console.log("comment added");
+                }
+            });
         })
+
     })
 
     //When the client emits 'username exists', this executes

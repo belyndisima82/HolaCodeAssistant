@@ -28,12 +28,12 @@ body {
 }
 
 h1 {
-  font-family: 'Krub', sans-serif;
+  font-family: 'Mandali', sans-serif !important;
 }
 
 .drawer{
   background-color: white;
-   border-left: 6px solid lightblue;
+  border-left: 6px solid lightblue;
   height: 700px;
   width: 320px;
   position: fixed;
@@ -70,4 +70,13 @@ h1 {
 
 .app-bar h1{
   color: rgb(243, 9, 233) !important;
+}
+
+.sendButton button{
+  background-color: rgb(132, 11, 126) !important;
+  font-family: 'Mandali', sans-serif !important;
+}
+
+.messages div {
+  font-family: 'Mandali', sans-serif !important;
 }

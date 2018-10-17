@@ -83,7 +83,7 @@ class App extends Component {
               <span>
               <div className="userId">{firebase.auth().currentUser.displayName}</div>
               <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
-              <h1 className="title">Welcome to Hola Code Assistant!<br></br></h1>
+              <h1 className="title"> WELCOME to Hola Code/><br></br></h1>
               <div className="rowNoFlex">
                 <Chat className='col-md-10' username={firebase.auth().currentUser.displayName} socket={socket} isSmallDevice={this.state.isSmallDevice} picture={firebase.auth().currentUser.photoURL}/>
                 <SideBar className='col-md-2'/>
