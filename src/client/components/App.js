@@ -6,6 +6,7 @@ import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import SideBar from './sidebar.jsx';
 const axios = require("axios");
+import {Container} from "mdbreact";
 
 const socket = io.connect();
 
@@ -78,12 +79,20 @@ class App extends Component {
       };
 
           return (
+
             <div className={`${this.state.isSignedIn ? '' : 'selected' }`}>
             {this.state.isSignedIn ?(
               <span>
+              <Container className="head">
               <div className="userId">{firebase.auth().currentUser.displayName}</div>
+<<<<<<< HEAD
               <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
               <h1 className="title"> WELCOME to Hola Code/><br></br></h1>
+=======
+              <button className="userbutton" onClick={() => firebase.auth().signOut()}>Sign out!</button>
+              <h1 className="title">Welcome to Hola Code Assistant!<br></br></h1>
+              </Container>
+>>>>>>> master
               <div className="rowNoFlex">
                 <Chat className='col-md-10' username={firebase.auth().currentUser.displayName} socket={socket} isSmallDevice={this.state.isSmallDevice} picture={firebase.auth().currentUser.photoURL}/>
                 <SideBar className='col-md-2'/>
