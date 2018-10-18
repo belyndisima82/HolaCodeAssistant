@@ -37,7 +37,7 @@ class Login extends Component {
                 })
                 return
             }
-    
+
             //If the username is not taken then:
             //- send the username to the parent component
             //- save it to the localStorage
@@ -51,11 +51,11 @@ class Login extends Component {
             username: e.target.value,
             errors: this.validate(e.target.value)
         })
-    } 
+    }
 
     validate(username) {
         const errors = []
-        
+
         if(username.length === 0) {
             errors.push('Username cannot be blank')
         }
@@ -77,10 +77,12 @@ class Login extends Component {
                 justifyContent: 'center',
                 backgroundImage: `linear-gradient(to right, ${blue500}, ${cyan500})`
             }}>
+            <h1>Hello Log in</h1>
+
                 <Paper style={{padding: 20, maxWidth: '100%', width: 372}} zDepth={3}>
                     <form onSubmit={this.handleSubmit}>
                         <div style={{textAlign: 'center', fontSize: 24}}>Simple chat</div>
-                        <TextField 
+                        <TextField
                             hintText="Enter your username"
                             floatingLabelText="Username"
                             floatingLabelFixed={true}
@@ -91,13 +93,14 @@ class Login extends Component {
                             onChange={this.handleChange}
                             ref={i => this.input = i}
                         />
-                        <RaisedButton 
+                        <RaisedButton
                             label="Login"
                             type="submit"
                             primary={true}
                             style={{float: 'right'}}/>
                     </form>
                 </Paper>
+                <h1>Hello Log in</h1>
             </div>
         )
     }
