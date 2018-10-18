@@ -26,7 +26,11 @@ class Attendance extends Component {
 
     return (
       <div>
-        <button onClick={this.onOpenModal}>Attendance</button>
+        <button className="button1" onClick={this.onOpenModal}>
+        <p className="textcolor">
+        Attendance
+        </p>
+        </button>
         <Modal open={open} onClose={this.onCloseModal} center>
           <Camera />
         </Modal>
