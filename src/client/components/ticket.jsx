@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Modal from 'react-responsive-modal';
 
+
 class Ticket extends Component {
 
   constructor(props) {
@@ -27,7 +28,11 @@ class Ticket extends Component {
 
     return (
       <div>
-        <button onClick={this.onOpenModal}>Help Desk</button>
+        <button className="buttons" onClick={this.onOpenModal}>
+        <p className="textcolor">
+        Help Desk
+        </p>
+        </button>
         <Modal open={open} onClose={this.onCloseModal} center>
           <iframe className='tickets' src="https://helpdesk.makerpass.com/groups/hc2/tickets"></iframe>
         </Modal>
