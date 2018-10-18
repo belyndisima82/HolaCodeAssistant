@@ -1,7 +1,7 @@
 {
     "extends": ["eslint:recommended", "plugin:react/recommended"],
     "plugins": [
-        "react"        
+        "react"
     ],
     "parserOptions": {
         "sourceType": "module"

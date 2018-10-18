@@ -3,3 +3,7 @@
 /dist
 
 npm-debug.log*
+
+
+# bundles
+client/dist/bundle.js
