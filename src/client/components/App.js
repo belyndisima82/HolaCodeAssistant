@@ -91,7 +91,6 @@ class App extends Component {
               <div className="rowNoFlex">
                 <Chat className='col-md-10' username={firebase.auth().currentUser.displayName} socket={socket} isSmallDevice={this.state.isSmallDevice} picture={firebase.auth().currentUser.photoURL}/>
                 <SideBar className='col-md-2'/>
-                </div>
               </div>
               </span>
             ) : (
