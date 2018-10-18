@@ -1,6 +1,6 @@
 import React from 'react'
 import { Avatar } from 'material-ui'
-import { cyan500, white, black, green500, red500 } from 'material-ui/styles/colors'
+import { cyan500, white, black, deepPurple100, indigo50 } from 'material-ui/styles/colors'
 import Radium, { StyleRoot } from 'radium'
 import PropTypes from 'prop-types'
 
@@ -61,7 +61,7 @@ const Message = ({ data }) =>
             borderBottom: `1px solid ${cyan500}`,
             animation: 'x 1s forwards',
             animationName: Radium.keyframes({
-                'from': { opacity: 0, backgroundColor: green500 },
+                'from': { opacity: 0, backgroundColor: indigo50 },
                 'to': { opacity: 1 }
             })
         }}>
@@ -91,10 +91,10 @@ const getSystemMsgTheme = (type) => {
 
     switch (type) {
         case 'login':
-            backgroundColor = green500
+            backgroundColor = deepPurple100
             break
         case 'logout':
-            backgroundColor = red500
+            backgroundColor = indigo50
             break
         default:
             color = black

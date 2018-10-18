@@ -8,6 +8,7 @@ var connection = mysql.createConnection({
   user: 'root',
   password: 'password',
   database: 'attendance',
+  charset: 'utf8mb4'
 });
 
 const addAttendance = function(name, day, callback) {
@@ -25,4 +26,18 @@ const addAttendance = function(name, day, callback) {
   );
 };
 
+const addMessages = function(username, day, message, callback) {
+  connection.query("INSERT INTO messages (username, day, message) VALUES (?, ?, ? )",
+    [username, day, message],
+    (err, results) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, results);
+      }
+    }
+  );
+};
+
 module.exports.addAttendance = addAttendance;
+module.exports.addMessages = addMessages;
