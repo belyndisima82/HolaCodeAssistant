@@ -13,10 +13,11 @@ CREATE TABLE students (
 CREATE TABLE messages (
   id int NOT NULL AUTO_INCREMENT,
   username varchar(50) NOT NULL,
-  day DATETIME NOT NULL,
+  day TIME NOT NULL,
   message TEXT NOT NULL,
   PRIMARY KEY (id)
 );
+
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root -p < server/schema.sql

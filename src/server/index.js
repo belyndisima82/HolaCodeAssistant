@@ -6,11 +6,12 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server)
 const moment = require('moment');
 const AWS = require('aws-sdk');
-AWS.config.loadFromPath('/Users/ulises/Documents/Repos/HolaCodeAssistant/src/server/credentials.json');
+AWS.config.loadFromPath('/Users/belindadominguez/Documents/AskPancho/src/server/credentials.json');
 AWS.config.update({region:'us-east-1'});
 const multer = require("multer");
 const fs = require("fs");
 const att = require('../database/mysql.js');
+const messagesArr = [];
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -63,15 +64,12 @@ io.on('connection', (socket) => {
         createMessage(socket, body, 'normal', message => {
             //Sends the message to the clients
             io.emit('message', message)
-            var q= 'INSERT INTO messages (username, day, message) VALUES (?, 'moment().format('HH:mm:ss')', ? )'
-            var inserts= [username, day, message]
-            att.connection.query(q, function(err, rows) {
-              att.connection.release();
+            att.addMessages(message.author, message.createdAt, message.body, (err, results) => {
               if (err) {
-                    return err;
-                } else {
-                    console.log("comment added");
-                }
+                console.log(err)
+              } else {
+                console.log(results);
+              }
             });
         })
 
