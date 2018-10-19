@@ -12,6 +12,7 @@ const multer = require("multer");
 const fs = require("fs");
 const att = require('../database/mysql.js');
 const messagesArr = [];
+const client = [];
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -34,16 +35,15 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname, 'dist/index.html')
 })
 
-
 const User = require('./classes/User')
 const UserCollection = new (require('./classes/UserCollection'))
 
 io.on('connection', (socket) => {
+
     //When the client emits 'user joined', this executes
     socket.on('user joined', (username, picture, callback = null) => {
         //Create new user
         const user = new User(username, picture)
-
         //Store user
         UserCollection.set(socket.id, user)
 
@@ -56,6 +56,10 @@ io.on('connection', (socket) => {
         createMessage(socket, '', 'login', message => {
             //Sends the message to the clients (except the sender)
             socket.broadcast.emit('message', message)
+
+            messagesArr.map(message =>
+              socket.emit('message', message))
+
         })
     })
 
@@ -63,7 +67,9 @@ io.on('connection', (socket) => {
     socket.on('message', body => {
         createMessage(socket, body, 'normal', message => {
             //Sends the message to the clients
-            io.emit('message', message)
+            io.emit('message', message);
+            messagesArr.push(message)
+
             att.addMessages(message.author, message.createdAt, message.body, (err, results) => {
               if (err) {
                 console.log(err)
