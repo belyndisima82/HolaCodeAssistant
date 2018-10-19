@@ -40,6 +40,15 @@ h1 {
   font-size: 3.5em;
   margin-top: 4vw;
 }
+.buttonUser{
+  margin-left: 90vw;
+}
+.buttonUser1{
+  margin-left: 95vw;
+}
+#messages{
+  background-image: url("Background.jpg");;
+}
 
 .drawer{
   background-color: white;
@@ -83,6 +92,7 @@ h1 {
 .app-bar h1{
   color: rgb(243, 9, 233) !important;
 }
+
 .buttons{
   width: 100px;
   height: 100px;

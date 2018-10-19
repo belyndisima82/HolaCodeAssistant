@@ -99,8 +99,7 @@ class App extends Component {
                 firebaseAuth={firebase.auth()}
                 />
               <div>
-                <div><img className= 'holaLogo' src='../images/holacode.png'></img></div>
-                <div><img className= 'holaLogo2' src='../images/holacode.png'></img></div>
+                <img className= 'holaLogo' src='../images/holacode.png'></img>
               </div>
               </span>
             )}
