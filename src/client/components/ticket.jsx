@@ -28,9 +28,8 @@ class Ticket extends Component {
 
     return (
       <div>
-        <button className="buttons" onClick={this.onOpenModal}>
+        <button className="buttons" onClick={this.onOpenModal}><i class="fas fa-info-circle"></i>
         <p className="textcolor">
-        Help Desk
         </p>
         </button>
         <Modal open={open} onClose={this.onCloseModal} center>

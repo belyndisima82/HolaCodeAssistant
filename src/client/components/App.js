@@ -19,7 +19,9 @@ class App extends Component {
         super(props)
         this.state = {
             isSignedIn: false,
-            isSmallDevice: this.isSmallDevice()
+            isSmallDevice: this.isSmallDevice(),
+            lat:'',
+            lon:''
         }
 
         this.handleResize = this.handleResize.bind(this)
@@ -89,7 +91,7 @@ class App extends Component {
               </Container>
               <div className="rowNoFlex">
                 <Chat className='col-md-10' username={firebase.auth().currentUser.displayName} socket={socket} isSmallDevice={this.state.isSmallDevice} picture={firebase.auth().currentUser.photoURL}/>
-                <SideBar className='col-md-2'/>
+                <SideBar className='col-md-2' lon={this.state.lon} lat={this.state.lat}/>
               </div>
               </span>
             ) : (

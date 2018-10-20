@@ -43,11 +43,13 @@ h1 {
 .buttonUser{
   margin-left: 90vw;
 }
+
 .buttonUser1{
   margin-left: 95vw;
 }
 #messages{
-  background-image: url("Background.jpg");;
+  background-image: url("Background.jpg");
+  margin-left: 1vw;
 }
 
 .drawer{

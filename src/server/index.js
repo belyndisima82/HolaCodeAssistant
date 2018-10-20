@@ -6,13 +6,15 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server)
 const moment = require('moment');
 const AWS = require('aws-sdk');
-AWS.config.loadFromPath('/Users/belindadominguez/Documents/AskPancho/src/server/credentials.json');
+AWS.config.loadFromPath('src/server/credentials.json');
 AWS.config.update({region:'us-east-1'});
 const multer = require("multer");
 const fs = require("fs");
 const att = require('../database/mysql.js');
+const bodyParser = require("body-parser");
 const messagesArr = [];
-const client = [];
+
+app.use(bodyParser.json());
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -173,10 +175,9 @@ function searchByImage(image, res) {
     else  {
       if(data.FaceMatches.length > 0) {
         var todayDate = new Date();
-        console.log(todayDate + ' ')
         var picId = 'Belinda'
 
-        att.addAttendance(picId, todayDate, (err, results) => {
+        att.addAttendance(todayDate, picId, todayDate, (err, results) => {
           if (err) {
             console.log(err);
             res.sendStatus(500);
@@ -188,7 +189,30 @@ function searchByImage(image, res) {
         res.send('Your face is not Recognized').end();
       }}
   });
-
 }
+  app.post('/bookmarks', function(req, res){
+    let bookmark = req.body.bookmark
+    att.addBookmark(bookmark,(err, results) =>{
+      if(err){
+        console.log(err)
+        res.sendStatus(500);
+      }else{
+        res.sendStatus(200);
+      }
+    })
+  })
+
+  app.get('/bookmarks', function(req, res){
+    att.getBookmarks((err, results) =>{
+      if(err){
+        console.log(err)
+        res.sendStatus(500);
+      }else{
+        res.status(200).json(results);
+      }
+    })
+  })
+
+
 
 server.listen(PORT, (error) => console.log(error ? error : `http://localhost:${PORT}`))

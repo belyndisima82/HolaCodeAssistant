@@ -5,9 +5,10 @@ CREATE DATABASE attendance;
 USE attendance;
 
 CREATE TABLE students (
+  today DATE NOT NULL,
   name varchar(100) NOT NULL,
   day DATETIME NOT NULL,
-  PRIMARY KEY (name, day)
+  PRIMARY KEY (name, today)
 );
 
 CREATE TABLE messages (
@@ -19,6 +20,11 @@ CREATE TABLE messages (
 );
 
 
+CREATE TABLE bookmarks (
+  id int NOT NULL AUTO_INCREMENT,
+  bookmark varchar(250) NOT NULL,
+  PRIMARY KEY (id)
+);
 /*  Execute this file from the command line by typing:
  *    mysql -u root -p < server/schema.sql
  *  to create the database and the tables.*/
