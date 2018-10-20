@@ -6,11 +6,15 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server)
 const moment = require('moment');
 const AWS = require('aws-sdk');
-AWS.config.loadFromPath('/Users/Jose/Documents/HolaCodeAssistant/src/server/credentials.json');
+AWS.config.loadFromPath('src/server/credentials.json');
 AWS.config.update({region:'us-east-1'});
 const multer = require("multer");
 const fs = require("fs");
 const att = require('../database/mysql.js');
+const bodyParser = require("body-parser");
+const messagesArr = [];
+
+app.use(bodyParser.json());
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -33,16 +37,15 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname, 'dist/index.html')
 })
 
-
 const User = require('./classes/User')
 const UserCollection = new (require('./classes/UserCollection'))
 
 io.on('connection', (socket) => {
+
     //When the client emits 'user joined', this executes
     socket.on('user joined', (username, picture, callback = null) => {
         //Create new user
         const user = new User(username, picture)
-
         //Store user
         UserCollection.set(socket.id, user)
 
@@ -55,6 +58,10 @@ io.on('connection', (socket) => {
         createMessage(socket, '', 'login', message => {
             //Sends the message to the clients (except the sender)
             socket.broadcast.emit('message', message)
+
+            messagesArr.map(message =>
+              socket.emit('message', message))
+
         })
     })
 
@@ -62,8 +69,18 @@ io.on('connection', (socket) => {
     socket.on('message', body => {
         createMessage(socket, body, 'normal', message => {
             //Sends the message to the clients
-            io.emit('message', message)
+            io.emit('message', message);
+            messagesArr.push(message)
+
+            att.addMessages(message.author, message.createdAt, message.body, (err, results) => {
+              if (err) {
+                console.log(err)
+              } else {
+                console.log(results);
+              }
+            });
         })
+
     })
 
     //When the client emits 'username exists', this executes
@@ -158,10 +175,9 @@ function searchByImage(image, res) {
     else  {
       if(data.FaceMatches.length > 0) {
         var todayDate = new Date();
-        console.log(todayDate + ' ')
         var picId = 'Belinda'
 
-        att.addAttendance(picId, todayDate, (err, results) => {
+        att.addAttendance(todayDate, picId, todayDate, (err, results) => {
           if (err) {
             console.log(err);
             res.sendStatus(500);
@@ -173,7 +189,30 @@ function searchByImage(image, res) {
         res.send('Your face is not Recognized').end();
       }}
   });
-
 }
+  app.post('/bookmarks', function(req, res){
+    let bookmark = req.body.bookmark
+    att.addBookmark(bookmark,(err, results) =>{
+      if(err){
+        console.log(err)
+        res.sendStatus(500);
+      }else{
+        res.sendStatus(200);
+      }
+    })
+  })
+
+  app.get('/bookmarks', function(req, res){
+    att.getBookmarks((err, results) =>{
+      if(err){
+        console.log(err)
+        res.sendStatus(500);
+      }else{
+        res.status(200).json(results);
+      }
+    })
+  })
+
+
 
 server.listen(PORT, (error) => console.log(error ? error : `http://localhost:${PORT}`))

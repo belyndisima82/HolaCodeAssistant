@@ -26,9 +26,8 @@ class Attendance extends Component {
 
     return (
       <div>
-        <button className="button1" onClick={this.onOpenModal}>
+        <button className="button1" onClick={this.onOpenModal}><i class="fas fa-user-check"></i>
         <p className="textcolor">
-        Attendance
         </p>
         </button>
         <Modal open={open} onClose={this.onCloseModal} center>

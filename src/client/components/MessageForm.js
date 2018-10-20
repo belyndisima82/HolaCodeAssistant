@@ -55,16 +55,16 @@ class MessageForm extends Component {
         return (
             <form onSubmit={this.handleSubmit} style={this.props.style}>
                 <Emoji addEmoji={this.addEmoji} />
-                <TextField 
+                <TextField
                     onChange={this.handleChange}
                     hintText={'Type your message here.'}
                     value={this.state.message}
                     ref={i => this.input = i}
-                    underlineShow={false} 
+                    underlineShow={false}
                     fullWidth={true}
-                    style={{flexGrow: 1, height: 36, padding: '0 10px'}} 
+                    style={{flexGrow: 1, height: 36, padding: '0 10px'}}
                     hintStyle={{bottom: 6}} />
-                <RaisedButton label="Send" primary={true} type="submit" />
+                  <RaisedButton className="sendButton" label="Send" primary={true} type="submit" />
             </form>
         )
     }
