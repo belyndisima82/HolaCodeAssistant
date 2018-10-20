@@ -3,7 +3,7 @@ import CalendarEvents from './calendar.jsx';
 import Ticket from './ticket.jsx';
 import Attendance from './attendance.jsx';
 import {Container} from "mdbreact";
-
+import Retrospective from './retrospective.jsx'
 
 class SideBar extends Component {
 
@@ -20,7 +20,7 @@ class SideBar extends Component {
 
           <Ticket  />
           <Attendance  />
-
+          <Retrospective />
         </div>
       </div>
 
