@@ -11,10 +11,10 @@ var connection = mysql.createConnection({
   charset: 'utf8mb4'
 });
 
-const addAttendance = function(name, day, callback) {
+const addAttendance = function(today, name, day, callback) {
   connection.query(
-    'INSERT INTO students (name, day) VALUES (?, ?)',
-    [name, day],
+    'INSERT INTO students (today, name, day) VALUES (?, ?, ?)',
+    [today, name, day],
     (err, results, fields) => {
       if (err) {
         callback(err, null);
@@ -39,5 +39,29 @@ const addMessages = function(username, day, message, callback) {
   );
 };
 
+const addBookmark = function(bookmark, callback){
+  connection.query("INSERT INTO bookmarks (bookmark) VALUES (?)",
+[bookmark],
+(err, results) => {
+  if(err){
+    callback(err, null);
+  }else{
+    callback(null, results)
+  }
+})
+}
+
+const getBookmarks = function(callback){
+  connection.query("SELECT * FROM bookmarks", (err, results, fields) => {
+  if(err){
+    callback(err, null);
+  }else{
+    callback(null, results)
+  }
+})
+}
+
 module.exports.addAttendance = addAttendance;
 module.exports.addMessages = addMessages;
+module.exports.addBookmark = addBookmark;
+module.exports.getBookmarks = getBookmarks;
