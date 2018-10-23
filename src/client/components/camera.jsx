@@ -43,19 +43,24 @@ class Camera extends Component {
 
     return (
       <div>
-        <Webcam
-          ref={node => this.webcam = node}
-          audio={false}
-          width='212'
-          height='160'
-          screenshotFormat="image/jpeg"
-        />
-        <button onClick={this.handleClick}>Capture photo</button>
-        {this.state.screenshot ?
-          <div>
-            <img src={this.state.screenshot} />
-            <button onClick={this.onFormSubmit}>Upload</button>
-          </div>: null}
+        <center><h1 className='attendance'>Record your Attendance!!</h1></center>
+        <div className='col-md-6 camera'>
+          <Webcam
+            ref={node => this.webcam = node}
+            audio={false}
+            width='212'
+            height='160'
+            screenshotFormat="image/jpeg"
+            />
+        </div>
+          <button onClick={this.handleClick} className='cameraButton'><i class="fas fa-camera"></i></button>
+          {this.state.screenshot ?
+            <div className='col-md-6 screenshot'>
+              <div>
+                <img src={this.state.screenshot} />
+              </div>
+              <button className='uploadButton' onClick={this.onFormSubmit}><i class="fas fa-cloud-upload-alt"></i></button>
+            </div>: null}
       </div>
     )}
 

@@ -40,7 +40,7 @@ button {
 }
 
 .selected {
-  height: 100vw;
+  height:53vw;
   background: url("clips.jpg") no-repeat center center fixed;
   background-size: cover;
 }
@@ -73,7 +73,6 @@ h2 {
 #messages{
   background-image: url("Background.jpg");
   margin-left: 1vw;
-  margin-right: 1vw;
   font-family: 'Mandali';
   font-size: 1em;
 }
@@ -107,8 +106,8 @@ h2 {
 }
 .tickets {
   border: solid 1px #777;
-  width: 395px;
-  max-height: 700px;
+  width: 97%;
+  height: 100%;
   min-height: 220px;
 }
 .rowNoFlex{
@@ -226,7 +225,7 @@ button:active {
 
 .bookmarkForm {
   margin-top: 10%;
-  margin-left: 10%;
+  margin-left: 15vw;
 }
 
 .inputBookmark {
@@ -248,4 +247,38 @@ button:active {
 
 li {
   list-style: none;
+}
+
+.bookmarkList {
+  margin-top: .5vw;
+  font-family: "Mandali";
+  font-size: 1.4em;
+}
+
+.attendance {
+  margin-top: .5vw;
+  font-family: "Mandali";
+  font-size: 1.7em;
+}
+
+.cameraButton {
+  font-size: 2vw;
+  background-color: transparent !important;
+  margin-left: 27vw !important;
+}
+
+.camera {
+  margin-left: 12vw;
+  margin-top: 7.5vw;
+}
+
+.screenshot {
+  margin-left: 35vw;
+  margin-top: -15.3vw;
+}
+
+.uploadButton {
+  font-size: 2vw;
+  background-color: transparent !important;
+  margin-left: 14vw !important;
 }
