@@ -1,45 +1,68 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 
-/* @font-face {
-  font-family: 'archer';
-  src: url('../ARCHER.ttf') format('truetype');
-  font-weight: normal;
+@font-face {
+  font-family: 'Material Icons';
   font-style: normal;
-} */
+  font-weight: 400;
+  src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
+    url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
+    url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  border-color: transparent !important;
+  font-size: 3em;
+  margin-left: .5vw;
+  margin-top: .4vw;
+}
+
+.exit {
+  background-color: transparent !important;
+  margin-left: .5vw;
+  padding-right: .5vw;
+  border-radius: 15%;
+}
+
+button {
+  border-color: transparent !important;
+
+}
 
 * {
     padding: 0;
     margin: 0;
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-
+.body {
+  font-family: "Mandali" !important;
 }
 
 .selected {
   height: 100vw;
-  background: url("stickyNotes.jpg") no-repeat center center fixed;
+  background: url("clips.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
 .holaLogo {
-  margin-left: 26%;
-  margin-top: 4%;
-  width: 15%
+  margin-left: 22%;
+  margin-top: 6%;
+  width: 18%
 }
 
-.holaLogo2 {
-  margin-left: 50%;
-  margin-top: 8%;
-  width: 15%
-}
-
-h1 {
+.title h1 {
   font-family: 'archer' !important;
-  font-size: 3.5em;
+  font-size: 4em !important;
   margin-top: 4vw;
 }
+
+h2 {
+  font-family: 'Mandali';
+  font-weight: bold !important;
+}
+
+
 .buttonUser{
   margin-left: 90vw;
 }
@@ -50,11 +73,14 @@ h1 {
 #messages{
   background-image: url("Background.jpg");
   margin-left: 1vw;
+  margin-right: 1vw;
+  font-family: 'Mandali';
+  font-size: 1em;
 }
 
 .drawer{
   background-color: white;
-   border: 1px solid #BFBFBF;
+  border: 1px solid #BFBFBF;
   height: 645px;
   width: 320px;
   position: fixed;
@@ -65,9 +91,10 @@ h1 {
 
 }
 .title{
+  font-family: "Mandali" !important;
   position:absolute;
-  right: 450px;
-  top: 10px;
+  right: 36%;
+  top: 10%;
 }
 .calendar {
   width: 300px;
@@ -76,7 +103,7 @@ h1 {
   right: 7px;
   max-height: 600px;
   min-height: 400px;
-  border-color: coral;
+  border-color: rgb(132, 9, 195);
 }
 .tickets {
   border: solid 1px #777;
@@ -89,47 +116,49 @@ h1 {
 }
 .app-bar {
   background-color: transparent !important;
+
 }
 
 .app-bar h1{
   color: rgb(243, 9, 233) !important;
+  font-family: "Mandali" !important;
+  font-weight: bold !important;
+  padding-left: 3vw;
 }
 
 .buttons{
-  width: 100px;
-  height: 100px;
+  width: 4vw;
+  height: 4vw;
   border-radius: 100%;
   position: absolute;
-  right: 180px;
-  top: 500px;
-  background-color: rgb(132, 11, 126);
-  font-size:20px;
+  right: 8vw;
+  top: 79%;
+  border-color: transparent;
+  font-size:1.7em;
   font-family: 'Mandali';
 }
 .button1{
   position: absolute;
-  right: 20px;
-  top: 500px;
-  width: 50px;
-  height: 50px;
+  right: 10%;
+  top: 79%;
+  width: 4vw;
+  height: 4vw;
   border-radius: 100%;
-background-color: rgb(132, 11, 126);
-font-size:17px;
-font-family: 'Montserrat';
-
+  border-color: transparent;
+  font-size:1.7em;
+  font-family: 'Mandali';
 }
 
 .button2{
   position: absolute;
-  right: 145px;
-  top: 500px;
-  width: 40px;
-  height: 40px;
+  right: 50%;
+  top: 79%;
+  width: 4vw;
+  height: 4vw;
   border-radius: 100%;
-background-color: transparent`;
-font-size:17px;
-font-family: 'Material Icons';
-
+  border-color: transparent;
+  font-size:1.7em;
+  font-family: 'Mandali';
 
 }
 
@@ -147,21 +176,31 @@ font-family: 'Material Icons';
 .textcolor{
   color: white;
 }
+
+
 button:hover {
-  background-color: rgb(230, 230, 230);
+  background-color: #99ff66 !important;
  }
+
 button:active {
-  background-color:  rgb(0, 188, 212); color: White;
-  box-shadow: 20px 10px #aaaaaa;
+  background-color:  #07bcbd; color: White;
+  box-shadow: 5px 8px #aaaaaa;
 }
+
+.sendButton button{
+  background-color: #07bcbd !important;
+}
+
 .head{
-  background-color: rgb(0, 188, 212);
+  background-color: #07bcbd;
   height: 45px;
   box-shadow: 1px 0.5px 6px #aaaaaa;
 }
 .userId{
   position: absolute;
   right: 50px;
+  font-family: 'Mandali';
+  font-weight: strong;
 }
 .userbutton{
   position: absolute;
@@ -170,4 +209,43 @@ button:active {
   border-radius: 15%;
   background-color: rgb(132, 11, 126);
   color: white;
+}
+
+.styles_modal__gNwvD {
+  width: 90%;
+  height: 70%;
+  background: url("bookmark.jpg") no-repeat center center fixed;
+  background-size: 65vw 45vw;
+}
+
+.bookmark {
+  margin-left: 13vw;
+  font-family: 'Mandali';
+  margin-top: 2vw;
+}
+
+.bookmarkForm {
+  margin-top: 10%;
+  margin-left: 10%;
+}
+
+.inputBookmark {
+  width: 75%;
+  height: 3vw;
+  border-radius: 3%;
+  border: #520184bd !important;
+  background-color: transparent;
+  border-style: solid !important;
+  font-family: 'Mandali';
+  font-size: 1em;
+}
+
+.add {
+  margin-left: 1vw;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+li {
+  list-style: none;
 }

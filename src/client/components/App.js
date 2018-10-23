@@ -86,7 +86,7 @@ class App extends Component {
               <span>
               <Container className="head">
                 <div className="userId">{firebase.auth().currentUser.displayName}</div>
-                <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
+                <button className= 'exit' title= 'Log Out' onClick={() => firebase.auth().signOut()}><i className="material-icons">exit_to_app</i></button>
                 <h1 className="title"> WELCOME TO HOLACODE<br></br></h1>
               </Container>
               <div className="rowNoFlex">

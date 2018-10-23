@@ -7,11 +7,11 @@ const BookMarkList = props => (
 
         <div>
           {
-            <ul>
+            <center><ul>
               {props.bookmarks.map((bookmark, i) => (
                 <li>{bookmark.bookmark}</li>
               ))}
-            </ul>
+            </ul></center>
         }
       </div>
 
