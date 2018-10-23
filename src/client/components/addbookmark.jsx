@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Container} from "mdbreact";
 
 class Addbookmark extends Component{
   constructor (props){
@@ -20,7 +21,6 @@ class Addbookmark extends Component{
   }
 
   handleSubmit(e){
-    alert(this.state.bookmark)
     e.preventDefault()
      this.props.addBookmark(this.state.bookmark)
      this.setState({
@@ -31,13 +31,18 @@ class Addbookmark extends Component{
   render(){
     return(
       <div>
-       bookmark:
-       <input
-         value={this.state.bookmark}
-         placeholder="Enter a Bookmark"
-         onChange={this.handleBookmark}
-       />
-     <button onClick={this.handleSubmit}>Add New Bookmark</button>
+        <Container>
+          <h1 className='bookmark'>Here you can add your Bookmarks ...</h1>
+        </Container>
+        <div class='bookmarkForm'>
+          <input
+            className='inputBookmark'
+            value={this.state.bookmark}
+            placeholder="Enter a new Bookmark"
+            onChange={this.handleBookmark}
+            />
+          <button className='add' onClick={this.handleSubmit}>+</button>
+        </div>
      </div>
     )
   }
