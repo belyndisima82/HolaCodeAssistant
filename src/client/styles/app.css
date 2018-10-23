@@ -162,6 +162,17 @@ h2 {
 
 }
 
+.button3{
+  position: absolute;
+  margin-left: 3vw;
+  top: 79%;
+  width: 4vw;
+  height: 4vw;
+  border-radius: 100%;
+  border-color: transparent;
+  font-size:.75em;
+  font-family: 'Mandali';
+}
 .sidebartitle{
   background-color: white;
   box-shadow: 1px 0.5px 6px #aaaaaa;

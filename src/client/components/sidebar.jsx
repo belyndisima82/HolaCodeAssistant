@@ -3,6 +3,7 @@ import Ticket from './ticket.jsx';
 import Attendance from './attendance.jsx';
 import {Container} from "mdbreact";
 import Bookmark from './bookmarks.jsx';
+import Retrospective from './retrospective.jsx'
 
 const location = function(lon, lat) {
   if (props.lon === -99.1732938 && props.lat === 19.4255024) {
@@ -27,6 +28,7 @@ const SideBar = props => (
              :
               <div></div>
             }
+          <Retrospective />
           <Bookmark />
         </div>
       </div>
