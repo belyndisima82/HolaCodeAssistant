@@ -71,7 +71,7 @@ class Bookmark extends Component {
 
     return (
       <div>
-        <button onClick={this.onOpenModal}>BookMark</button>
+        <button className="button2" onClick={this.onOpenModal}><i class="far fa-bookmark"></i></button>
         <Modal open={open} onClose={this.onCloseModal} center>
 
           <Addbookmark addBookmark={this.addBookmark}/>
