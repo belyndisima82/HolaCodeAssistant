@@ -144,16 +144,16 @@ h2 {
   width: 4vw;
   height: 4vw;
   border-radius: 100%;
-  border-color: transparent;  
+  border-color: transparent;
   font-size:1.7em;
   font-family: 'Mandali';
 }
 
 .button2{
   position: absolute;
-  right: 56%;
+  right: 50%;
   top: 79%;
-  width: 2vw;
+  width: 4vw;
   height: 4vw;
   border-radius: 100%;
   border-color: transparent;
