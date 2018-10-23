@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Webcam from "react-webcam";
 const axios = require("axios");
+import swal from 'sweetalert';
 
 
 class Camera extends Component {
@@ -13,7 +14,12 @@ class Camera extends Component {
     }
     this.handleClick = this.handleClick.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.sweetalertfunction = this.sweetalertfunction.bind(this);
   }
+
+  sweetalertfunction(src) {
+   swal(src);
+   }
 
   handleClick(){
         const screenshot = this.webcam.getScreenshot();
@@ -31,7 +37,7 @@ class Camera extends Component {
         };
         axios.post("/upload", formData, config)
             .then((response) => {
-                alert(response.data +", your Attendance is recorded");
+                this.sweetalertfunction(response.data +", your Attendance is recorded");
                 console.log(response);
             }).catch((error) => {
               console.log(error);

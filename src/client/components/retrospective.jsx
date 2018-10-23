@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Modal from 'react-responsive-modal';
-import Camera from './camera.jsx'
-//desplegar makerpass ticket
-class Attendance extends Component {
+import Survey from './survey.jsx'
+
+class Retrospective extends Component {
 
   constructor(props) {
     super(props)
@@ -26,15 +26,13 @@ class Attendance extends Component {
 
     return (
       <div>
-        <button title='Attendance' className="button1" onClick={this.onOpenModal}><i class="fas fa-user-check"></i>
-        <p className="textcolor">
-        </p>
-        </button>
+        <button title='Weekly Survey' className='button3' onClick={this.onOpenModal}><i class="weekly material-icons">check_box</i></button>
         <Modal open={open} onClose={this.onCloseModal} center>
-          <Camera />
+        <iframe className="weeklyRetrosFrame" src="https://docs.google.com/forms/d/e/1FAIpQLSccvjf18kfMxSFAcmi_Nptxhz6ySSd-x_16Nly5XFOf1Ur2IA/viewform?embedded=true" width="640" height="3838" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
         </Modal>
       </div>
     )}
 }
 
-export default Attendance;
+
+export default Retrospective;

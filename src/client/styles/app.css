@@ -11,11 +11,12 @@
     url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
 }
 
+body {
+  font-family: 'Mandali'
+}
+
 .material-icons {
   border-color: transparent !important;
-  font-size: 3em;
-  margin-left: .5vw;
-  margin-top: .4vw;
 }
 
 .exit {
@@ -23,6 +24,10 @@
   margin-left: .5vw;
   padding-right: .5vw;
   border-radius: 15%;
+}
+
+.exitButton {
+  font-size: 3em;
 }
 
 button {
@@ -150,7 +155,7 @@ h2 {
 
 .button2{
   position: absolute;
-  right: 50%;
+  right: 51%;
   top: 79%;
   width: 4vw;
   height: 4vw;
@@ -159,6 +164,22 @@ h2 {
   font-size:1.7em;
   font-family: 'Mandali';
 
+}
+
+.button3{
+  position: absolute;
+  margin-left: 3vw;
+  top: 79.5%;
+  width: 4vw;
+  height: 4vw;
+  border-radius: 100%;
+  border-color: transparent;
+  font-size:1.7em;
+  font-family: 'Mandali';
+}
+
+.weekly {
+  font-size: 1.1em;
 }
 
 .sidebartitle{
@@ -186,6 +207,10 @@ button:active {
   box-shadow: 5px 8px #aaaaaa;
 }
 
+.sendButton {
+  height:2.8vw;
+}
+
 .sendButton button{
   background-color: #07bcbd !important;
 }
@@ -208,6 +233,13 @@ button:active {
   border-radius: 15%;
   background-color: rgb(132, 11, 126);
   color: white;
+}
+
+.weeklyRetrosFrame {
+  height: 32vw;
+  margin-top: 3vw;
+  margin-left: -6vw;
+  width: 75vw;
 }
 
 .styles_modal__gNwvD {
