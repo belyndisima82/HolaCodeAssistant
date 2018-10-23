@@ -26,9 +26,11 @@ class Retrospective extends Component {
 
     return (
       <div>
-        <button onClick={this.onOpenModal}>Retrospective</button>
+        <button className ='button2' onClick={this.onOpenModal}><i class="material-icons">
+check_box
+</i></button>
         <Modal open={open} onClose={this.onCloseModal} center>
-      <Survey />
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSccvjf18kfMxSFAcmi_Nptxhz6ySSd-x_16Nly5XFOf1Ur2IA/viewform?embedded=true" width="640" height="3838" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
         </Modal>
       </div>
     )}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Ticket from './ticket.jsx';
 import Attendance from './attendance.jsx';
 import {Container} from "mdbreact";
-import Bookmark from './bookmarks.jsx';
+//import Bookmark from './bookmarks.jsx';
 import Retrospective from './retrospective.jsx'
 
 const location = function(lon, lat) {
@@ -28,7 +28,7 @@ const SideBar = props => (
              :
               <div></div>
             }
-          <Bookmark />
+          <Retrospective />
         </div>
       </div>
 
