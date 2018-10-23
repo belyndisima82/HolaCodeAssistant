@@ -26,7 +26,7 @@ class Retrospective extends Component {
 
     return (
       <div>
-        <button className ='button2' onClick={this.onOpenModal}><i class="material-icons">
+        <button className ='button3' onClick={this.onOpenModal}><i class="material-icons">
 check_box
 </i></button>
         <Modal open={open} onClose={this.onCloseModal} center>

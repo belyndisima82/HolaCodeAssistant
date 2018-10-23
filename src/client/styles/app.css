@@ -144,16 +144,16 @@ h2 {
   width: 4vw;
   height: 4vw;
   border-radius: 100%;
-  border-color: transparent;
+  border-color: transparent;  
   font-size:1.7em;
   font-family: 'Mandali';
 }
 
 .button2{
   position: absolute;
-  right: 50%;
+  right: 56%;
   top: 79%;
-  width: 4vw;
+  width: 2vw;
   height: 4vw;
   border-radius: 100%;
   border-color: transparent;
@@ -162,6 +162,17 @@ h2 {
 
 }
 
+.button3{
+  position: absolute;
+  margin-left: 3vw;
+  top: 79%;
+  width: 4vw;
+  height: 4vw;
+  border-radius: 100%;
+  border-color: transparent;
+  font-size:.75em;
+  font-family: 'Mandali';
+}
 .sidebartitle{
   background-color: white;
   box-shadow: 1px 0.5px 6px #aaaaaa;
@@ -171,7 +182,7 @@ h2 {
 .tool{
   text-align: center;
   color: rgb(243, 9, 233);
-  font-family: 'Montserrat';
+  font-family: 'Mandali';
 }
 .textcolor{
   color: white;
